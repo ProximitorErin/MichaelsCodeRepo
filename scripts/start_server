@@ -1,3 +1,2 @@
 #!/bin/bash
-pwd
-/usr/lib/jvm/jre-1.8.0/bin/java -jar /var/www/html/gs-spring-boot-0.1.0.jar  > /dev/null 2> /dev/null < /dev/null &
+/usr/lib/jvm/jre-1.8.0/bin/java -jar /var/www/html/gs-spring-boot-0.1.0.jar
