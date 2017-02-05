@@ -23,11 +23,12 @@ phases:
     commands:
       - echo Build started on `date`
       - ./gradlew build
+      - zip ourapp.zip *
   post_build:
     commands:
       - echo Build completed on `date`
 artifacts:
   files:
-    - build/libs/gs-spring-boot-0.1.0.jar
+    - ourapp.zip
   discard-paths: yes
 
