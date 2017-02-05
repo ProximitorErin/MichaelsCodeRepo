@@ -15,7 +15,6 @@ phases:
       - printf "export GRADLE_HOME=/opt/gradle\nexport PATH=\$PATH:/opt/gradle/bin\n" > /etc/profile.d/gradle.sh 
       - . /etc/profile.d/gradle.sh
       - gradle -v
-      - which gradlew
       - chmod +x ./gradlew
   pre_build:
     commands:
