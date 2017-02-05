@@ -29,6 +29,8 @@ phases:
       - echo Build completed on `date`
 artifacts:
   files:
-    - ourapp.zip
+    - appspec.yml
+    - index.html
+    - scripts
   discard-paths: yes
 
