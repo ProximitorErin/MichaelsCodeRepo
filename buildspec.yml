@@ -8,8 +8,8 @@ phases:
   install:
     commands:
       - apt-get update -y
-      - apt-get install nodejs
-      - apt-get install npm
+      - apt-get install nodejs -y
+      - apt-get install npm -y
       - gradle_version=2.6
       - wget -c http://services.gradle.org/distributions/gradle-2.6-all.zip
       - unzip  gradle-2.6-all.zip -d /opt
