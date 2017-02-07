@@ -31,7 +31,7 @@ phases:
     commands:
       - echo Build started on `date`
       - ./gradlew build
-      - zip ourapp.zip *
+      - cd client && ng build --prod
   post_build:
     commands:
       - echo Build completed on `date`
@@ -41,5 +41,6 @@ artifacts:
     - index.html
     - scripts/*
     - build/**/*
+    - client/dist/**/*
   discard-paths: no
 
