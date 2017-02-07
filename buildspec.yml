@@ -31,7 +31,7 @@ phases:
     commands:
       - echo Build started on `date`
       - ./gradlew build
-      - cd client && ng build --prod
+      - cd client && npm install && ng build --prod
   post_build:
     commands:
       - echo Build completed on `date`
