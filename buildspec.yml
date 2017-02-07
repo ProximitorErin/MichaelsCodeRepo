@@ -10,6 +10,7 @@ phases:
       - apt-get update -y
       - apt-get install nodejs -y
       - apt-get install npm -y
+      - npm install -g angular-cli
       - gradle_version=2.6
       - wget -c http://services.gradle.org/distributions/gradle-2.6-all.zip
       - unzip  gradle-2.6-all.zip -d /opt
