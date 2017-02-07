@@ -9,6 +9,7 @@ phases:
     commands:
       - apt-get update -y
       - apt-get install nodejs -y
+      - ln -s /usr/bin/nodejs /usr/bin/node
       - apt-get install npm -y
       - npm cache clean -f
       - npm install -g npm
