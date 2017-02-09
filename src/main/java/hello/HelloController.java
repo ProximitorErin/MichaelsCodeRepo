@@ -37,7 +37,7 @@ public class HelloController {
 		
 		findings += "clean!";
 		
-        return "Greetings 6 from Spring Boot: " + findings;
+        return "Greetings 7 from Spring Boot: " + findings;
     }
 
 }
