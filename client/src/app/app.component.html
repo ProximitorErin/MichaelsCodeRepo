@@ -1,3 +1,11 @@
 <h1>
-  {{title}}
+  <!--{{title}}-->
+
+    Username:
+    <input [(ngModel)]='username' />
+    <br>
+    Password:
+    <input [(ngModel)]='password' type="password" />
+    <br>
+    <input type="button" (click)="redirect()" value="Login"/>
 </h1>
