@@ -9,6 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 public class HelloController {
 
+	@RequestMapping("/login")
+    public String greeting(@RequestParam(value="username") String username,
+		@RequestParam(value="password") String password) {
+			if ("username" == "derek")
+			{
+				return "player";
+			}
+			else
+			{
+				return "admin";
+			}
+    }
+
     @RequestMapping("/")
     public String index() {
     	
