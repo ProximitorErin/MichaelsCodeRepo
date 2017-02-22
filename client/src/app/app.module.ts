@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { LogonComponent } from './logon/logon.component';
+import { AuthenticationService } from './authentication.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { LogonComponent } from './logon/logon.component';
       { path: '', component: LogonComponent }
     ])
   ],
-  providers: [],
+  providers: [ AuthenticationService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
