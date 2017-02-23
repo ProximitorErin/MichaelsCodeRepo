@@ -13,7 +13,7 @@ public class HelloController {
 	@RequestMapping("/login")
     public String greeting(@RequestParam(value="username") String username,
 		@RequestParam(value="password") String password) {
-			if ("username" == "derek")
+			if (username == "derek")
 			{
 				return "player";
 			}

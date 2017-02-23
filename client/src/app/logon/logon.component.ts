@@ -16,14 +16,29 @@ export class LogonComponent implements OnInit {
 
   username: string = '';
   password: string = '';
+  role: string = '';
+  errorMessage: any;
 
   redirect(): void
   {
-    if (this._authService.getRole() == 'admin')
+    this._authService.getRole(this.username, this.password)
+      .subscribe(
+        data => this.formatResult(data),
+        error => this.errorMessage = <any>error);
+      
+    /* if (this._authService.getRole() == 'admin')
+    {
+      this._router.navigate(['administrator']);
+    }*/
+  }
+
+  formatResult(result)
+  {
+    this.role = result;
+    if (this.role == 'admin')
     {
       this._router.navigate(['administrator']);
     }
-    //this.username = 'working';
   }
 
 }
