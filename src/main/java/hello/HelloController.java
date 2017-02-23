@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RestController
 public class HelloController {
 
-	@RequestMapping(method=RequestMethod.GET)
+	/* @RequestMapping(method=RequestMethod.GET)
     public @ResponseBody List<Tournament> getTournaments() {
 		List<Tournament> list = new ArrayList<Tournament>();
 		list.add(new Tournament("hello", "3/4/73", "6/1/99", 3, 5, "derek"));
 		list.add(new Tournament("bye", "6/6/66", "7/4/87", 7, 7, "michael"));
         return list;
-    }
+    } */
 
 	@RequestMapping("/login")
     public String greeting(@RequestParam(value="username") String username,
