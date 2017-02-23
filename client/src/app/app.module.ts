@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { LogonComponent } from './logon/logon.component';
 import { AuthenticationService } from './authentication.service';
+import { TournamentListComponent } from './tournament-list/tournament-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdministratorComponent,
-    LogonComponent
+    LogonComponent,
+    TournamentListComponent
   ],
   imports: [
     BrowserModule,
@@ -21,6 +23,7 @@ import { AuthenticationService } from './authentication.service';
     HttpModule,
     RouterModule.forRoot([
       { path: 'administrator', component: AdministratorComponent },
+      { path: 'listTournaments', component: TournamentListComponent },
       { path: '', component: LogonComponent }
     ])
   ],

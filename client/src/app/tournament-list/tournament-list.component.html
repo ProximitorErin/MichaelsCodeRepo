@@ -1,0 +1,28 @@
+ <ul class='nav nav-tabs'>
+    <li><a [routerLink]="['/createTournament']"> Create Tournament</a></li>
+    <li><a [routerLink]="['/listTournaments']">List Tournaments</a></li>
+  </ul>
+  <div class='table-responsive'>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>StartDate</th>
+          <th>EndDate</th>
+          <th>TeamSize</th>
+          <th>TeamCount</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let tournament of tournaments'>
+            <td>{{ tournament.Name }}</td>
+            <td>{{ tournament.StartDate }}</td>
+            <td>{{ tournament.EndDate }}</td>
+            <td>{{ tournament.TeamSize }}</td>
+            <td>{{ tournament.TeamCount }}</td>
+            <td>{{ tournament.Username }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
