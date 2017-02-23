@@ -1,14 +1,26 @@
 package hello;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 public class HelloController {
+
+	@RequestMapping(method=RequestMethod.GET)
+    public @ResponseBody List<Tournament> getTournaments() {
+		List<Tournament> list = new ArrayList<Tournament>();
+		list.add(new Tournament("hello", "3/4/73", "6/1/99", 3, 5, "derek"));
+		list.add(new Tournament("bye", "6/6/66", "7/4/87", 7, 7, "michael"));
+        return list;
+    }
 
 	@RequestMapping("/login")
     public String greeting(@RequestParam(value="username") String username,
