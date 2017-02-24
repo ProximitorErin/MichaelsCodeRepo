@@ -14,6 +14,11 @@ export class TournamentListComponent implements OnInit {
 
    }
 
+   delete(): void
+   {
+     console.log("got delete");
+   }
+
   ngOnInit() {
     this._tournamentService.getTournaments()
       .subscribe(

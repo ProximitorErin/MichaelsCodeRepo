@@ -12,6 +12,7 @@
           <th>TeamSize</th>
           <th>TeamCount</th>
           <th>Username</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +23,7 @@
             <td>{{ tournament.TeamSize }}</td>
             <td>{{ tournament.TeamCount }}</td>
             <td>{{ tournament.Username }}</td>
+            <td><input type="button" (click)="delete()" value="Delete"/></td>
         </tr>
       </tbody>
     </table>

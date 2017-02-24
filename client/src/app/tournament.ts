@@ -1,9 +1,9 @@
 export interface ITournament
 {
-    Name : string;
-    StartDate : string;
-    EndDate : string;
-    TeamSize : number;
-    TeamCount : number;
-    Username : string;
+    name : string;
+    startDate : string;
+    endDate : string;
+    teamSize : number;
+    teamCount : number;
+    sername : string;
 }
