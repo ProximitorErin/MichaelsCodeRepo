@@ -23,7 +23,7 @@ export class TournamentsService {
 
   private handleError(error: Response)
   {
-    console.error(error);
+    console.error('tournament service error:' + error);
     return Observable.throw(error.json().error || 'Server error');
   }
 

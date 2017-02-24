@@ -17,12 +17,12 @@
       </thead>
       <tbody>
         <tr *ngFor='let tournament of tournaments'>
-            <td>{{ tournament.Name }}</td>
-            <td>{{ tournament.StartDate }}</td>
-            <td>{{ tournament.EndDate }}</td>
-            <td>{{ tournament.TeamSize }}</td>
-            <td>{{ tournament.TeamCount }}</td>
-            <td>{{ tournament.Username }}</td>
+            <td>{{ tournament.name }}</td>
+            <td>{{ tournament.startDate }}</td>
+            <td>{{ tournament.endDate }}</td>
+            <td>{{ tournament.teamSize }}</td>
+            <td>{{ tournament.teamCount }}</td>
+            <td>{{ tournament.username }}</td>
             <td><input type="button" (click)="delete()" value="Delete"/></td>
         </tr>
       </tbody>
