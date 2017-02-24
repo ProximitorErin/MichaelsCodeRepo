@@ -10,19 +10,24 @@ import { LogonComponent } from './logon/logon.component';
 import { AuthenticationService } from './authentication.service';
 import { TournamentsService } from './tournaments.service';
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
+import { TournamentCreationComponent } from './tournament-creation/tournament-creation.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdministratorComponent,
     LogonComponent,
-    TournamentListComponent
+    TournamentListComponent,
+    TournamentCreationComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
+      { path: 'createTournament', component: TournamentCreationComponent },
       { path: 'administrator', component: AdministratorComponent },
       { path: 'listTournaments', component: TournamentListComponent },
       { path: '', component: LogonComponent }

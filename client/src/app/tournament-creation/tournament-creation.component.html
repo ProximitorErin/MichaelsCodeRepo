@@ -1,0 +1,56 @@
+ <ul class='nav nav-tabs'>
+    <li><a [routerLink]="['/createTournament']"> Create Tournament</a></li>
+    <li><a [routerLink]="['/listTournaments']">List Tournaments</a></li>
+  </ul>
+ 
+        Tournament Name:
+        <input [(ngModel)]='tournamentName' />
+        <br>
+        Start Date:
+        <input [(ngModel)]='tournamentStartDate' type="date" />
+        <br>
+        End Date:
+        <input [(ngModel)]='tournamentEndDate' type="date" />
+        <br>
+        Maximum Team Size:
+        <input [(ngModel)]='teamSize' type="number" />
+        <br>
+        Team Count:
+        <input [(ngModel)]='teamCount' type="number" />
+ <br>
+ <button (click)="showDialog = !showDialog" class="btn">Open</button>
+ <!--<input type="button" (click)="addStat()" value="Add Statistic"/>-->
+ <div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Sport</th>
+        <th>Stat Name</th>
+        <th>Stat Weight</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Football</td>
+        <td>Touchdown</td>
+        <td>.25</td>
+      </tr>
+      <tr>
+        <td>Basketball</td>
+        <td>Baskets</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Gymnastics</td>
+        <td>Style Points</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+ <input type="button" (click)="redirect()" value="Submit"/>
+ <app-dialog [(visible)]="showDialog">
+  <h1>Hello World</h1>
+  <button (click)="showDialog = !showDialog" class="btn">Close</button>
+</app-dialog>
+
