@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { LogonComponent } from './logon/logon.component';
 import { AuthenticationService } from './authentication.service';
+import { TournamentsService } from './tournaments.service';
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
 
 @NgModule({
@@ -27,7 +28,7 @@ import { TournamentListComponent } from './tournament-list/tournament-list.compo
       { path: '', component: LogonComponent }
     ])
   ],
-  providers: [ AuthenticationService ],
+  providers: [ AuthenticationService, TournamentsService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TournamentsService } from '../tournaments.service';
+import { Observable } from 'rxjs/Observable';
+import { ITournament } from '../tournament';
 
 @Component({
   selector: 'app-tournament-list',
@@ -7,29 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TournamentListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _tournamentService : TournamentsService) {
+
+   }
 
   ngOnInit() {
+    this._tournamentService.getTournaments()
+      .subscribe(
+        tournaments => this.tournaments = tournaments,
+        error => this.errorMessage = <any>error
+      );
+    //this.tournaments = this._tournamentService.getTournaments();
   }
 
-
-  tournaments: any[] = [
-    {
-      "Name" : "The Big Smackdown",
-      "StartDate" : "3/4/2017",
-      "EndDate" : "5/1/2017",
-      "TeamSize" : 5,
-      "TeamCount" : 10,
-      "Username" : "derek"
-    },
-    {
-      "Name" : "April Foolishness",
-      "StartDate" : "4/1/2017",
-      "EndDate" : "6/1/2017",
-      "TeamSize" : 7,
-      "TeamCount" : 3,
-      "Username" : "michael"
-    }
-  ];
+  tournaments: ITournament[];
+  errorMessage: string;
 
 }
