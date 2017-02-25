@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 @RestController
 public class HelloController {
@@ -22,9 +26,20 @@ public class HelloController {
 		@RequestParam(value="end") String end,
 		@RequestParam(value="size") int size,
 		@RequestParam(value="count") int count,
-		@RequestParam(value="stats") List<Statistic> stats)
+		@RequestParam(value="stats") String stats)
 	{
-		return "success: got " + stats.size() + " stats";
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+		Statistic[] obj = mapper.readValue(stats, Statistic[].class);
+		return "success: " + obj.length;
+	} catch (JsonGenerationException e) {
+    	e.printStackTrace();
+	} catch (JsonMappingException e) {
+    	e.printStackTrace();
+	} catch (IOException e) {
+    	e.printStackTrace();
+	}
+		return "failure";
     }
 
 	@RequestMapping("/getStatsByDate")
