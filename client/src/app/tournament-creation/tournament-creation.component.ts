@@ -21,7 +21,7 @@ export class TournamentCreationComponent implements OnInit {
   redirect(): void
   {
     console.log('vals: ' + this.tournamentName + this.tournamentStartDate + this.tournamentEndDate + 
-    this.teamCount + this.teamSize);
+    this.teamCount + this.teamSize + this.sel1 + this.statWeight);
   }
 
   showDialog = false;
@@ -31,6 +31,7 @@ export class TournamentCreationComponent implements OnInit {
   tournamentEndDate: string = '';
   teamSize: number;
   teamCount: number;
-
+  sel1: string = '';
+  statWeight: number;
 
 }

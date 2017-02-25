@@ -18,7 +18,7 @@
         Team Count:
         <input [(ngModel)]='teamCount' type="number" />
  <br>
- <button (click)="showDialog = !showDialog" class="btn">Open</button>
+ <button (click)="showDialog = !showDialog" class="btn">Add Statistic</button>
  <!--<input type="button" (click)="addStat()" value="Add Statistic"/>-->
  <div class="container">
   <table class="table">
@@ -50,7 +50,17 @@
 </div>
  <input type="button" (click)="redirect()" value="Submit"/>
  <app-dialog [(visible)]="showDialog">
-  <h1>Hello World</h1>
+  <div class="form-group">
+    <label for="sel1">Statistic Name:</label>
+    <select class="form-control" [(ngModel)]="sel1">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+    </select>
+    Statistic Weight:
+    <input [(ngModel)]='statWeight' type="number" />
+  </div>
   <button (click)="showDialog = !showDialog" class="btn">Close</button>
 </app-dialog>
 
