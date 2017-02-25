@@ -31,6 +31,8 @@ public class HelloController {
     public @ResponseBody List<Statistic> getStatsByDate(@RequestParam(value="startDate") String startDate,
 		@RequestParam(value="endDate") String endDate) {
 		List<Statistic> list = new ArrayList<Statistic>();
+		// Leave the blank row here, so we can have a blank row in the combo
+		list.add(new Statistic("", "", null));
 		list.add(new Statistic("Swimming", "Laps", null));
 		list.add(new Statistic("Soccer", "Saves", null));
         return list;

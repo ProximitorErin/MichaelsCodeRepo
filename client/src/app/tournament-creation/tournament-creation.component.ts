@@ -43,12 +43,14 @@ export class TournamentCreationComponent implements OnInit {
   
   showAddStat(): void
   {
-    this._tournamentService.getStatsForDates(this.tournamentStartDate, this.tournamentEndDate)
-      .subscribe(
-        availableStats => this.availableStatistics = availableStats,
-        error => this.errorMessage = <any>error
-      );
-
+    if (this.availableStatistics == null)
+    {
+      this._tournamentService.getStatsForDates(this.tournamentStartDate, this.tournamentEndDate)
+        .subscribe(
+          availableStats => this.availableStatistics = availableStats,
+          error => this.errorMessage = <any>error
+        );
+    }
     this.showDialog = !this.showDialog;
   }
 
@@ -85,6 +87,6 @@ export class TournamentCreationComponent implements OnInit {
 
   chosenStatistics: IStatistic[] = [];
 
-  availableStatistics: IStatistic[] = [];
+  availableStatistics: IStatistic[] = null;
 
 }
