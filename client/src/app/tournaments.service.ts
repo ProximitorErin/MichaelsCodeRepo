@@ -12,8 +12,17 @@ export class TournamentsService {
 
   private _tournamentsUrl = '/getTournaments';
   private _statsUrl = '/getStatsByDate';
+  private _createUrl = '/createTournament';
 
   constructor(private _http: Http) { }
+
+  createTournament(name: string, start: string, end: string, size: number, count: number, stats: IStatistic[])
+  {
+    return this._http.get(this._createUrl)
+      .map((response: Response) => <string>response.json())
+      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .catch(this.handleError);
+  }
 
   getStatsForDates(start: string, end: string) : Observable<IStatistic[]>
   {

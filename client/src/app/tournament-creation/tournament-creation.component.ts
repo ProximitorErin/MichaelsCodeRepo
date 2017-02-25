@@ -54,11 +54,19 @@ export class TournamentCreationComponent implements OnInit {
 
   deleteStat(): void
   {
-
+    //todo
   }
 
-  redirect(): void
+  submit(): void
   {
+    this._tournamentService.createTournament(this.tournamentName, this.tournamentStartDate, 
+      this.tournamentEndDate, this.teamSize, this.teamCount, this.chosenStatistics)
+        .subscribe(
+          answer => this.answer = answer,
+          error => this.errorMessage = <any>error
+        );
+
+
     console.log('vals: ' + this.tournamentName + this.tournamentStartDate + this.tournamentEndDate + 
     this.teamCount + this.teamSize + this.sel1 + this.statWeight);
   }
@@ -73,20 +81,10 @@ export class TournamentCreationComponent implements OnInit {
   sel1: string = '';
   statWeight: number;
   errorMessage: string;
+  answer: string;
 
   chosenStatistics: IStatistic[] = [];
 
-  availableStatistics: IStatistic[] = [
-      {
-        "sportName" : "Football",
-        "statName" : "Touchdown",
-        "weight" : null
-      },
-      {
-        "sportName" : "Soccer",
-        "statName" : "Goal",
-        "weight" : null
-      }
-    ];
+  availableStatistics: IStatistic[] = [];
 
 }

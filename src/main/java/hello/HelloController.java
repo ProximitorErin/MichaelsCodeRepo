@@ -13,6 +13,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RestController
 public class HelloController {
 
+	/* createTournament(size: number, count: number, stats: IStatistic[]) */
+
+	@RequestMapping("/createTournament")
+    public @ResponseBody String createTournament (
+		@RequestParam(value="name") String name,
+		@RequestParam(value="start") String start,
+		@RequestParam(value="end") String end,
+		@RequestParam(value="size") int size,
+		@RequestParam(value="count") int count,
+		@RequestParam(value="stats") List<Statistic> stats)
+	{
+		return "success";
+    }
+
 	@RequestMapping("/getStatsByDate")
     public @ResponseBody List<Statistic> getStatsByDate(@RequestParam(value="startDate") String startDate,
 		@RequestParam(value="endDate") String endDate) {
