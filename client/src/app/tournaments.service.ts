@@ -12,7 +12,7 @@ export class TournamentsService {
 
   private _tournamentsUrl = '/getTournaments';
   private _statsUrl = '/getStatsByDate';
-  private _createUrl = '/createTournament';
+  private _createUrl = '/createTournamentService';
 
   constructor(private _http: Http) { }
 

@@ -15,7 +15,7 @@ public class HelloController {
 
 	/* createTournament(size: number, count: number, stats: IStatistic[]) */
 
-	@RequestMapping("/createTournament")
+	@RequestMapping("/createTournamentService")
     public @ResponseBody String createTournament (
 		@RequestParam(value="name") String name,
 		@RequestParam(value="start") String start,
