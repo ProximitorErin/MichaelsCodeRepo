@@ -24,7 +24,7 @@ public class HelloController {
 		@RequestParam(value="count") int count,
 		@RequestParam(value="stats") List<Statistic> stats)
 	{
-		return "success";
+		return "success: got " + stats.size() + " stats";
     }
 
 	@RequestMapping("/getStatsByDate")

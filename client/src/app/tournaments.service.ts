@@ -18,7 +18,12 @@ export class TournamentsService {
 
   createTournament(name: string, start: string, end: string, size: number, count: number, stats: IStatistic[])
   {
-    return this._http.get(this._createUrl)
+    return this._http.get(this._createUrl + '?name=' + name +
+      '&start=' + start +
+      '&end=' + end +
+      '&size=' + size +
+      '&count=' + count +
+      '&stats=' + stats)
       .map((response: Response) => <string>response.json())
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
