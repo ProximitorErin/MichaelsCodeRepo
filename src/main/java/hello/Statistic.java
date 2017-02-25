@@ -1,28 +1,39 @@
 package hello;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Statistic {
 
-    private final String _sportName;
-    private final String _statName;
-    private final String _weight;
+
+    @JsonProperty("sportName")
+    public  String sportName;
+    @JsonProperty("statName")
+    public  String statName;
+    @JsonProperty("weight")
+    public  String weight;
+
+    public Statistic()
+    {
+        
+    }
 
     public Statistic(String sportName, String statName, String weight) 
     {
-        this._sportName = sportName;
-        this._statName = statName;
-        this._weight = weight;
+        this.sportName = sportName;
+        this.statName = statName;
+        this.weight = weight;
     }
 
     public String getSportName() {
-        return _sportName;
+        return sportName;
     }
 
     public String getStatName() {
-        return _statName;
+        return statName;
     }
 
     public String getWeight() {
-        return _weight;
+        return weight;
     }
 
 }
