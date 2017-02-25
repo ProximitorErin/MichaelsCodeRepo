@@ -23,7 +23,7 @@ export class TournamentsService {
       '&end=' + end +
       '&size=' + size +
       '&count=' + count +
-      '&stats=' + stats)
+      '&stats=' + JSON.stringify(stats))
       .map((response: Response) => <string>response.json())
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
@@ -32,7 +32,7 @@ export class TournamentsService {
   getStatsForDates(start: string, end: string) : Observable<IStatistic[]>
   {
     return this._http.get(this._statsUrl + '?startDate=' + start + '&endDate=' + end)
-      .map((response: Response) => JSON.stringify(<IStatistic[]>response.json()))
+      .map((response: Response) => <IStatistic[]>response.json())
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
   }
