@@ -25,7 +25,6 @@ export class TournamentListComponent implements OnInit {
         tournaments => this.tournaments = tournaments,
         error => this.errorMessage = <any>error
       );
-    //this.tournaments = this._tournamentService.getTournaments();
   }
 
   tournaments: ITournament[];

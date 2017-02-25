@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogComponent } from '../dialog/dialog.component';
 import { IStatistic } from '../statistic';
+import { TournamentsService } from '../tournaments.service';
 
 @Component({
   selector: 'app-tournament-creation',
@@ -9,7 +10,7 @@ import { IStatistic } from '../statistic';
 })
 export class TournamentCreationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _tournamentService : TournamentsService) { }
 
   ngOnInit() {
   }
@@ -38,7 +39,18 @@ export class TournamentCreationComponent implements OnInit {
     console.log('clicked');
     this.showDialog = !this.showDialog;
 
-    }
+  }
+  
+  showAddStat(): void
+  {
+    this._tournamentService.getStatsForDates(this.tournamentStartDate, this.tournamentEndDate)
+      .subscribe(
+        availableStats => this.availableStatistics = availableStats,
+        error => this.errorMessage = <any>error
+      );
+
+    this.showDialog = !this.showDialog;
+  }
 
   deleteStat(): void
   {
@@ -60,6 +72,7 @@ export class TournamentCreationComponent implements OnInit {
   teamCount: number;
   sel1: string = '';
   statWeight: number;
+  errorMessage: string;
 
   chosenStatistics: IStatistic[] = [];
 

@@ -13,6 +13,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RestController
 public class HelloController {
 
+	@RequestMapping("/getStatsByDate")
+    public @ResponseBody List<Statistic> getStatsByDate(@RequestParam(value="startDate") String startDate,
+		@RequestParam(value="endDate") String endDate) {
+		List<Statistic> list = new ArrayList<Statistic>();
+		list.add(new Statistic("Swimming", "Laps", null));
+		list.add(new Statistic("Soccer", "Saves", null));
+        return list;
+    }
+
 	@RequestMapping("/getTournaments")
     public @ResponseBody List<Tournament> getTournaments() {
 		List<Tournament> list = new ArrayList<Tournament>();
