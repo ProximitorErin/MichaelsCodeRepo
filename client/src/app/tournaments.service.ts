@@ -27,26 +27,4 @@ export class TournamentsService {
     return Observable.throw(error.json().error || 'Server error');
   }
 
-  /* getTournamentsBAD() : any[]
-  {
-    return [
-      {
-        "Name" : "The Big Smackdown",
-        "StartDate" : "3/4/2017",
-        "EndDate" : "5/1/2017",
-        "TeamSize" : 5,
-        "TeamCount" : 10,
-        "Username" : "derek"
-      },
-      {
-        "Name" : "April Foolishness",
-        "StartDate" : "4/1/2017",
-        "EndDate" : "6/1/2017",
-        "TeamSize" : 7,
-        "TeamCount" : 3,
-        "Username" : "michael"
-      }
-    ];
-  } */
-
 }

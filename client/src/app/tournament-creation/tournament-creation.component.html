@@ -30,21 +30,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Football</td>
-        <td>Touchdown</td>
-        <td>.25</td>
-      </tr>
-      <tr>
-        <td>Basketball</td>
-        <td>Baskets</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>Gymnastics</td>
-        <td>Style Points</td>
-        <td>1</td>
-      </tr>
+      <tr *ngFor='let stat of chosenStatistics'>
+            <td>{{ stat.sportName }}</td>
+            <td>{{ stat.statName }}</td>
+            <td>{{ stat.weight }}</td>
+            <td><input type="button" (click)="deleteStat()" value="Delete"/></td>
+        </tr>
     </tbody>
   </table>
 </div>
@@ -52,15 +43,14 @@
  <app-dialog [(visible)]="showDialog">
   <div class="form-group">
     <label for="sel1">Statistic Name:</label>
+
     <select class="form-control" [(ngModel)]="sel1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
+      <option *ngFor='let stat of availableStatistics'>{{stat.sportName}}--{{ stat.statName }}</option>
     </select>
+    
     Statistic Weight:
     <input [(ngModel)]='statWeight' type="number" />
   </div>
-  <button (click)="showDialog = !showDialog" class="btn">Close</button>
+  <button (click)="addStat()" class="btn">OK</button>
 </app-dialog>
 

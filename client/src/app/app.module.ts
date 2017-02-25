@@ -12,6 +12,7 @@ import { TournamentsService } from './tournaments.service';
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
 import { TournamentCreationComponent } from './tournament-creation/tournament-creation.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { TournamentUpdateComponent } from './tournament-update/tournament-update.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +21,15 @@ import { DialogComponent } from './dialog/dialog.component';
     LogonComponent,
     TournamentListComponent,
     TournamentCreationComponent,
-    DialogComponent
+    DialogComponent,
+    TournamentUpdateComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
+      { path: 'updateTournament', component: TournamentUpdateComponent},
       { path: 'createTournament', component: TournamentCreationComponent },
       { path: 'administrator', component: AdministratorComponent },
       { path: 'listTournaments', component: TournamentListComponent },
