@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DialogComponent } from '../dialog/dialog.component';
 import { IStatistic } from '../statistic';
 import { TournamentsService } from '../tournaments.service';
@@ -10,7 +11,7 @@ import { TournamentsService } from '../tournaments.service';
 })
 export class TournamentCreationComponent implements OnInit {
 
-  constructor(private _tournamentService : TournamentsService) { }
+  constructor(private _router: Router, private _tournamentService : TournamentsService) { }
 
   ngOnInit() {
   }
@@ -71,6 +72,11 @@ export class TournamentCreationComponent implements OnInit {
 
     console.log('vals: ' + this.tournamentName + this.tournamentStartDate + this.tournamentEndDate + 
     this.teamCount + this.teamSize + this.sel1 + this.statWeight);
+
+    if (this.answer.indexOf("success") > -1)
+    {
+      this._router.navigate(['administrator']);
+    }
   }
 
   showDialog = false;

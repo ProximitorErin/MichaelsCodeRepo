@@ -25,11 +25,6 @@ export class LogonComponent implements OnInit {
       .subscribe(
         data => this.formatResult(data),
         error => this.errorMessage = <any>error);
-      
-    /* if (this._authService.getRole() == 'admin')
-    {
-      this._router.navigate(['administrator']);
-    }*/
   }
 
   formatResult(result)
