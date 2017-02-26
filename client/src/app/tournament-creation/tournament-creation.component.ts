@@ -65,14 +65,19 @@ export class TournamentCreationComponent implements OnInit {
     this._tournamentService.createTournament(this.tournamentName, this.tournamentStartDate, 
       this.tournamentEndDate, this.teamSize, this.teamCount, this.chosenStatistics)
         .subscribe(
-          answer => this.answer = answer,
+          data => this.formatResult(data),
           error => this.errorMessage = <any>error
         );
 
 
     console.log('vals: ' + this.tournamentName + this.tournamentStartDate + this.tournamentEndDate + 
     this.teamCount + this.teamSize + this.sel1 + this.statWeight);
+  }
 
+  formatResult(result)
+  {
+    this.answer = result;
+    
     if (this.answer.indexOf("success") > -1)
     {
       this._router.navigate(['administrator']);
