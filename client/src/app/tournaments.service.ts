@@ -24,8 +24,8 @@ export class TournamentsService {
       '&size=' + size +
       '&count=' + count +
       '&stats=' + JSON.stringify(stats))
-      .map((response: Response) => <string>response.json())
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .map((response: Response) => <string>response.text())
+      .do(data => console.log('All: ' + data))
       .catch(this.handleError);
   }
 
