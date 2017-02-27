@@ -50,8 +50,8 @@ CREATE TABLE Tournaments (
     teamSize   INT NOT NULL DEFAULT 10, #default to 10 athletes on a team
     teamCount  INT NOT NULL DEFAULT 10, #default to 10 teams in a tournament
     adminName  VARCHAR(16) NOT NULL,
-    PRIMARY KEY (Name, StartDate, EndDate),
-    FOREIGN KEY (AdminName) REFERENCES Users(name)
+    PRIMARY KEY (name, startDate, endDate),
+    FOREIGN KEY (adminName) REFERENCES Users(name)
 );
 
 CREATE TABLE Teams (
@@ -59,17 +59,21 @@ CREATE TABLE Teams (
     wins                 INT DEFAULT 0, #default to 0 wins
     username             VARCHAR(16) NOT NULL, 
     tournamentName       VARCHAR(128) NOT NULL, 
+    tournamentStart      DATE NOT NULL,
+    tournamentEnd        DATE NOT NULL,
     CONSTRAINT pk_teams PRIMARY KEY (name, username, tournamentName), #Assumption:No same team name in same tournament
-    FOREIGN KEY (tournamentName) REFERENCES Tournaments(name)
+    CONSTRAINT fk_tournaments_teams FOREIGN KEY (tournamentName, tournamentStart, tournamentEnd) REFERENCES Tournaments(name, startDate, endDate)
 );
 
 CREATE TABLE TeamRoster (
-    athlete_ID           INT NOT NULL,
+    athleteID           INT NOT NULL,
     teamName             VARCHAR(32) NOT NULL,
     tournamentName       VARCHAR(32) NOT NULL,
-    PRIMARY KEY (athlete_ID, teamName, tournamentName),
-    FOREIGN KEY (athlete_ID) REFERENCES Athletes(id),
-    FOREIGN KEY (tournamentName) REFERENCES Tournaments(name)
+    tournamentStart      DATE NOT NULL,
+    tournamentEnd        DATE NOT NULL,
+    PRIMARY KEY (athleteID, teamName, tournamentName),
+    FOREIGN KEY (athleteID) REFERENCES Athletes(id),
+    CONSTRAINT fk_tournaments_roster FOREIGN KEY (tournamentName, tournamentStart, tournamentEnd) REFERENCES Tournaments(name, startDate, endDate)
 );
 
 CREATE TABLE AthletePerformanceInEvent(
@@ -78,7 +82,7 @@ CREATE TABLE AthletePerformanceInEvent(
     date         DATE NOT NULL,
     time         TIME NOT NULL,
     place        VARCHAR(32) NOT NULL,
-    scoreMetric  INT NOT NULL DEFAULT 1,  # what should scoremetric be (currently arbitrary default)
+    scoreMetric  FLOAT NOT NULL DEFAULT 1.0,  # what should scoremetric be (currently arbitrary default)
     statName     VARCHAR(32) NOT NULL,
     PRIMARY KEY (athleteID, eventName, date, time, place, statName),
     FOREIGN KEY (athleteID) REFERENCES Athletes(ID),
@@ -88,10 +92,12 @@ CREATE TABLE AthletePerformanceInEvent(
 
 CREATE TABLE TournamentPerformanceScoring(
     tournamentName       VARCHAR(32) NOT NULL,
+    tournamentStart      DATE NOT NULL,
+    tournamentEnd        DATE NOT NULL,
     statName             VARCHAR(32) NOT NULL,
-    statWeight           INT NOT NULL DEFAULT 1,  # should weight be INT? (currently arbitrary default)
-    PRIMARY KEY (tournamentName, statName),
-    FOREIGN KEY (tournamentName) REFERENCES Tournaments(name),
+    statWeight           FLOAT NOT NULL DEFAULT 1.0,  # should weight be INT? (currently arbitrary default)
+    PRIMARY KEY (tournamentName, tournamentStart, tournamentEnd, statName),
+    CONSTRAINT fk_tournaments_tps FOREIGN KEY (tournamentName, tournamentStart, tournamentEnd) REFERENCES Tournaments(name, startDate, endDate),
     FOREIGN KEY (statName) REFERENCES Stats(name)
 );
 
@@ -101,7 +107,7 @@ INSERT INTO Athletes (firstName, lastName, sportName) VALUES ("Michael", "Jordan
 INSERT INTO Events (name, date, time, place) VALUES ('game1','27/2/17','14:00:00','State Farm Arena');
 INSERT INTO Stats (name, sportName) VALUES ('rebounds', 'bb'),('field goals','bb');
 INSERT INTO Tournaments (name, startDate, endDate, adminName) VALUES ('WinnerTakeAll','17/2/28','17/3/6','gryk2');
-INSERT INTO Teams (name, username, tournamentName) VALUES ('MichaelsBest','gryk2', 'WinnerTakeAll');
-INSERT INTO TeamRoster (athlete_ID, teamName, tournamentName) VALUES (1,'MichaelsBest','WinnerTakeAll'); #why is sport in here?
-INSERT INTO AthletePerformanceInEvent (athleteID, eventName, date, time, place, scoreMetric, statName) VALUES (1, 'game1', '27/2/17','14:00:00','State Farm Arena', 30, 'field goals'); #Need FK to stats?
-INSERT INTO TournamentPerformanceScoring (tournamentName, statName, statWeight) VALUES ('WinnerTakeAll', 'field goals', 3); 
+INSERT INTO Teams (name, username, tournamentName, tournamentStart, tournamentEnd) VALUES ('MichaelsBest','gryk2', 'WinnerTakeAll','17/2/28','17/3/6');
+INSERT INTO TeamRoster (athleteID, teamName, tournamentName, tournamentStart, tournamentEnd) VALUES (1,'MichaelsBest','WinnerTakeAll','17/2/28','17/3/6'); #why is sport in here?
+INSERT INTO AthletePerformanceInEvent (athleteID, eventName, date, time, place, scoreMetric, statName) VALUES (1, 'game1', '27/2/17','14:00:00','State Farm Arena', 30.0, 'field goals'); #Need FK to stats?
+INSERT INTO TournamentPerformanceScoring (tournamentName, tournamentStart, tournamentEnd, statName, statWeight) VALUES ('WinnerTakeAll','17/2/28','17/3/6', 'field goals', 0.25); 
