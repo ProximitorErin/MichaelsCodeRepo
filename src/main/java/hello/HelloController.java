@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import javax.sql.DataSource;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,9 +17,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import org.springframework.jdbc.datasource.DataSourceUtils;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 @RestController
+
 public class HelloController {
+
+	@Autowired
+	private ApplicationContext ctx;
 
 	/* createTournament(size: number, count: number, stats: IStatistic[]) */
 
@@ -64,15 +76,85 @@ public class HelloController {
 	@RequestMapping("/login")
     public String greeting(@RequestParam(value="username") String username,
 		@RequestParam(value="password") String password) {
-			if (username.equals("derek"))
-			{
-				return "player";
+
+			// Retrieve the data source from the application context
+
+			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+			//ds.setPassword(System.getenv("DB_PASSWORD"));
+		// Open a database connection using Spring's DataSourceUtils
+		Connection c = DataSourceUtils.getConnection(ds);
+		try {
+			// retrieve a list of three random cities
+			PreparedStatement ps = c.prepareStatement(
+				"SELECT * FROM michaelsdb.Users WHERE name='" + username + 
+					"' and password = '" + password + "'");
+			ResultSet rs = ps.executeQuery();
+			Boolean isAdmin = false;
+
+			if (rs.next()) {
+				isAdmin = rs.getBoolean("isAdmin");
+				
+				if (isAdmin)
+				{
+					return "admin";
+				}
+				else
+				{
+					return "player";
+				}
 			}
 			else
 			{
-				return "admin";
+				return "failure";
 			}
+
+		} catch (SQLException ex) {
+			// something has failed and we print a stack trace to analyse the error
+			
+			// ignore failure closing connection
+			try { c.close(); } catch (SQLException e) { return "" + e; }
+
+			return ""+ex;
+
+		} finally {
+			// properly release our connection
+		}
+		
     }
+
+	@RequestMapping("/tryUsingConnectionPool")
+	public String checkPoolUse()
+	{
+		// Retrieve the data source from the application context
+
+			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+			ds.setPassword(System.getenv("DB_PASSWORD"));
+		// Open a database connection using Spring's DataSourceUtils
+		Connection c = DataSourceUtils.getConnection(ds);
+		try {
+			// retrieve a list of three random cities
+			PreparedStatement ps = c.prepareStatement(
+				"SELECT * FROM michaelsdb.Users");
+			ResultSet rs = ps.executeQuery();
+			String name = "";
+			while(rs.next()) {
+				name = rs.getString("name");
+			}
+			return name;
+		} catch (SQLException ex) {
+			// something has failed and we print a stack trace to analyse the error
+			
+			// ignore failure closing connection
+			try { c.close(); } catch (SQLException e) { return "" + e; }
+
+			return ""+ex;
+
+		} finally {
+			// properly release our connection
+			DataSourceUtils.releaseConnection(c, ds);
+		}
+
+	}
 
     @RequestMapping("/")
     public String index() {
