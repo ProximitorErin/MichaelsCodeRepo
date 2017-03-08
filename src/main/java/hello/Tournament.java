@@ -3,13 +3,13 @@ package hello;
 public class Tournament {
 
     private final String _name;
-    private final String _startDate;
-    private final String _endDate;
+    private final java.util.Date _startDate;
+    private final java.util.Date _endDate;
     private final int _teamSize;
     private final int _teamCount;
     private final String _username;
 
-    public Tournament(String name, String startDate, String endDate, 
+    public Tournament(String name, java.util.Date startDate, java.util.Date endDate, 
         int teamSize, int teamCount, String username) 
     {
         this._endDate = endDate;
@@ -24,11 +24,11 @@ public class Tournament {
         return _name;
     }
 
-    public String getStartDate() {
+    public java.util.Date getStartDate() {
         return _startDate;
     }
 
-    public String getEndDate() {
+    public java.util.Date getEndDate() {
         return _endDate;
     }
 

@@ -67,9 +67,56 @@ public class HelloController {
 
 	@RequestMapping("/getTournaments")
     public @ResponseBody List<Tournament> getTournaments() {
+
+		/* SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		java.util.Date startDate = formatter.parse(sdate);
+		java.util.Date endDate = formatter.parse(edate);
+		PreparedStatement pstmt = connection.prepareStatement("SELECT sales.InvoiceNumber, sales.ShipToAddress, sales.Date "
+					+ "FROM sales, customers "
+					+ "WHERE sales.CardRecordID = customers.CardRecordID "
+					+ "AND customers.Name = 'Cash Sales' "
+					+ "AND sales.Date BETWEEN ? AND ? "
+					+ "ORDER BY sales.ShipToAddress ASC, sales.Date DESC");
+		pstmt.setDate(1, new java.sql.Date(startDate.getTime()));
+		pstmt.setDate(2, new java.sql.Date(endDate.getTime()));*/
+
 		List<Tournament> list = new ArrayList<Tournament>();
-		list.add(new Tournament("hello", "3/4/73", "6/1/99", 3, 5, "derek"));
-		list.add(new Tournament("bye", "6/6/66", "7/4/87", 7, 7, "michael"));
+		
+		// Retrieve the data source from the application context
+		BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+		// Open a database connection using Spring's DataSourceUtils
+		Connection c = DataSourceUtils.getConnection(ds);
+		try {
+			// retrieve a list of three random cities
+			PreparedStatement ps = c.prepareStatement(
+				"SELECT * FROM michaelsdb.Tournaments");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String name = rs.getString("name");
+				java.util.Date startDate = rs.getDate("startDate");
+				java.util.Date endDate = rs.getDate("endDate");
+				int teamSize = rs.getInt("teamSize");
+				int teamCount = rs.getInt("teamCount");
+				String adminName = rs.getString("adminName");
+
+				list.add(new Tournament(name, startDate, endDate, teamSize, teamCount, adminName));
+
+			}
+
+		} catch (SQLException ex) {
+			// something has failed and we print a stack trace to analyse the error
+			return list;
+		} finally {
+			// properly release our connection
+			// ignore failure closing connection
+			try { c.close(); } catch (SQLException e) { return list; }
+		}
+
+		
+		//list.add(new Tournament("hello", "3/4/73", "6/1/99", 3, 5, "derek"));
+		//list.add(new Tournament("bye", "6/6/66", "7/4/87", 7, 7, "michael"));
         return list;
     }
 
@@ -78,47 +125,43 @@ public class HelloController {
 		@RequestParam(value="password") String password) {
 
 			// Retrieve the data source from the application context
-
 			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
-			//ds.setPassword(System.getenv("DB_PASSWORD"));
-		// Open a database connection using Spring's DataSourceUtils
-		Connection c = DataSourceUtils.getConnection(ds);
-		try {
-			// retrieve a list of three random cities
-			PreparedStatement ps = c.prepareStatement(
-				"SELECT * FROM michaelsdb.Users WHERE name='" + username + 
-					"' and password = '" + password + "'");
-			ResultSet rs = ps.executeQuery();
-			Boolean isAdmin = false;
 
-			if (rs.next()) {
-				isAdmin = rs.getBoolean("isAdmin");
-				
-				if (isAdmin)
-				{
-					return "admin";
+			// Open a database connection using Spring's DataSourceUtils
+			Connection c = DataSourceUtils.getConnection(ds);
+			try {
+				// retrieve a list of three random cities
+				PreparedStatement ps = c.prepareStatement(
+					"SELECT * FROM michaelsdb.Users WHERE name='" + username + 
+						"' and password = '" + password + "'");
+				ResultSet rs = ps.executeQuery();
+				Boolean isAdmin = false;
+
+				if (rs.next()) {
+					isAdmin = rs.getBoolean("isAdmin");
+					
+					if (isAdmin)
+					{
+						return "admin";
+					}
+					else
+					{
+						return "player";
+					}
 				}
 				else
 				{
-					return "player";
+					return "failure";
 				}
+
+			} catch (SQLException ex) {
+				// something has failed and we print a stack trace to analyse the error
+				return ""+ex;
+			} finally {
+				// properly release our connection
+				// ignore failure closing connection
+				try { c.close(); } catch (SQLException e) { return "" + e; }
 			}
-			else
-			{
-				return "failure";
-			}
-
-		} catch (SQLException ex) {
-			// something has failed and we print a stack trace to analyse the error
-			
-			// ignore failure closing connection
-			try { c.close(); } catch (SQLException e) { return "" + e; }
-
-			return ""+ex;
-
-		} finally {
-			// properly release our connection
-		}
 		
     }
 
