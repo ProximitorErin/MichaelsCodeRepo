@@ -14,7 +14,7 @@ export class TournamentListComponent implements OnInit {
 
    }
 
-   delete(tournamentName: string): void
+   delete(tournamentName): void
    {
      console.log("got delete " + tournamentName);
    }
