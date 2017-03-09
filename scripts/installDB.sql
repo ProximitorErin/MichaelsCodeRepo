@@ -101,13 +101,173 @@ CREATE TABLE TournamentPerformanceScoring(
     FOREIGN KEY (statName) REFERENCES Stats(name)
 );
 
-INSERT INTO Users (name, password, email) VALUES ('derekf2', 'derekf2', 'derekf2@illinois.edu'), ('gryk2', 'gryk2', 'gryk2@illinois.edu'), ('liacopo2', 'liacopo2', 'liacopo2@illinois.edu'), ('mwalsh34', 'mwalsh34', 'mwalsh34@illinois.edu');
-INSERT INTO Sports (name, seasonStartDate, seasonEndDate) VALUES ('bb', '17/2/3', '17/3/24');
-INSERT INTO Athletes (firstName, lastName, sportName) VALUES ("Michael", "Jordan", "bb");
-INSERT INTO Events (name, date, time, place) VALUES ('game1','27/2/17','14:00:00','State Farm Arena');
-INSERT INTO Stats (name, sportName) VALUES ('rebounds', 'bb'),('field goals','bb');
-INSERT INTO Tournaments (name, startDate, endDate, adminName) VALUES ('WinnerTakeAll','17/2/28','17/3/6','gryk2');
-INSERT INTO Teams (name, username, tournamentName, tournamentStart, tournamentEnd) VALUES ('MichaelsBest','gryk2', 'WinnerTakeAll','17/2/28','17/3/6');
-INSERT INTO TeamRoster (athleteID, teamName, tournamentName, tournamentStart, tournamentEnd) VALUES (1,'MichaelsBest','WinnerTakeAll','17/2/28','17/3/6'); #why is sport in here?
-INSERT INTO AthletePerformanceInEvent (athleteID, eventName, date, time, place, scoreMetric, statName) VALUES (1, 'game1', '27/2/17','14:00:00','State Farm Arena', 30.0, 'field goals'); #Need FK to stats?
-INSERT INTO TournamentPerformanceScoring (tournamentName, tournamentStart, tournamentEnd, statName, statWeight) VALUES ('WinnerTakeAll','17/2/28','17/3/6', 'field goals', 0.25); 
+INSERT INTO Users (name, password, email) VALUES 
+                                            ('derekf2', 'derekf2', 'derekf2@illinois.edu'), 
+                                            ('gryk2', 'gryk2', 'gryk2@illinois.edu'), 
+                                            ('liacopo2', 'liacopo2', 'liacopo2@illinois.edu'), 
+                                            ('mwalsh34', 'mwalsh34', 'mwalsh34@illinois.edu');
+                                 
+INSERT INTO Sports (name, seasonStartDate, seasonEndDate) VALUES ('basketball', '16/10/3', '17/4/4');
+
+INSERT INTO Athletes (id, firstName, lastName, sportName, jerseyNumber) VALUES       
+                                            (1, "Michael", "Jordan", "basketball", 23),      
+                                            (2, "Leron", "Black", "basketball", 12),      
+                                            (3, "Maverick", "Morgan", "basketball", 22),      
+                                            (4, "Te'Jon", "Lucas", "basketball", 03),      
+                                            (5, "Tracy", "Abrams", "basketball", 13),      
+                                            (6, "Malcolm", "Hill", "basketball", 21),      
+                                            (7, "Kipper", "Nichols", "basketball", 02),      
+                                            (8, "Jalen", "Coleman-Lands", "basketball", 05),      
+                                            (9, "Michael", "Finke", "basketball", 43);
+
+INSERT INTO Events (name, date, time, place) VALUES ('Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena');
+
+INSERT INTO Stats (name, sportName) VALUES       
+                                            ('fieldGoals', 'basketball'),      
+                                            ('fieldGoalAttempts','basketball'),      
+                                            ('threePointers', 'basketball'),      
+                                            ('threePointAttempts','basketball'),      
+                                            ('freeThrowsGoals', 'basketball'),      
+                                            ('freeThrowAttempts','basketball'),      
+                                            ('offensiveRebounds','basketball'),      
+                                            ('defensiveRebounds','basketball'),      
+                                            ('personalFouls','basketball'),      
+                                            ('totalPoints','basketball'),      # Some Values like Total points can be calculated
+                                            ('assists','basketball'),      
+                                            ('turnOvers','basketball'),      
+                                            ('blocks','basketball'),      
+                                            ('steals','basketball'),      
+                                            ('minutes','basketball');
+
+INSERT INTO Tournaments (name, startDate, endDate, adminName) VALUES ('WinnerTakeAll','17/2/24','17/3/6','gryk2');
+
+INSERT INTO Teams (name, username, tournamentName, tournamentStart, tournamentEnd) VALUES 
+                                            ('MichaelsBest','gryk2', 'WinnerTakeAll','17/2/24','17/3/6');
+
+INSERT INTO TeamRoster (athleteID, teamName, tournamentName, tournamentStart, tournamentEnd) VALUES 
+                                            (1,'MichaelsBest','WinnerTakeAll','17/2/24','17/3/6'); #why is sport in here?
+
+INSERT INTO AthletePerformanceInEvent (athleteID, eventName, date, time, place, scoreMetric, statName) VALUES       
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'fieldGoals'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 8, 'fieldGoalAttempts'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'threePointers'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'threePointAttempts'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'freeThrowsGoals'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'freeThrowAttempts'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'offensiveRebounds'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 5, 'defensiveRebounds'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'personalFouls'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 7, 'totalPoints'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'assists'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'turnOvers'),   
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'blocks'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'steals'),      
+                                            (2, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 22, 'minutes'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 6, 'fieldGoals'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 9, 'fieldGoalAttempts'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'threePointers'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'threePointAttempts'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'freeThrowsGoals'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'freeThrowAttempts'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'offensiveRebounds'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'defensiveRebounds'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'personalFouls'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 12, 'totalPoints'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'assists'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'turnOvers'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'blocks'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'steals'),      
+                                            (3, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 28, 'minutes'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'fieldGoals'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'fieldGoalAttempts'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'threePointers'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'threePointAttempts'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 5, 'freeThrowsGoals'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 8, 'freeThrowAttempts'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'offensiveRebounds'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'defensiveRebounds'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'personalFouls'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 7, 'totalPoints'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'assists'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'turnOvers'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'blocks'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'steals'),      
+                                            (4, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 31, 'minutes'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'fieldGoals'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 8, 'fieldGoalAttempts'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'threePointers'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 5, 'threePointAttempts'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'freeThrowsGoals'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'freeThrowAttempts'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'offensiveRebounds'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'defensiveRebounds'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'personalFouls'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 13, 'totalPoints'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 6, 'assists'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'turnOvers'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'blocks'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'steals'),      
+                                            (5, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 27, 'minutes'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 6, 'fieldGoals'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 11, 'fieldGoalAttempts'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'threePointers'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 6, 'threePointAttempts'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'freeThrowsGoals'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'freeThrowAttempts'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'offensiveRebounds'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'defensiveRebounds'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'personalFouls'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 19, 'totalPoints'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'assists'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'turnOvers'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'blocks'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'steals'),      
+                                            (6, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 38, 'minutes'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'fieldGoals'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'fieldGoalAttempts'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'threePointers'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'threePointAttempts'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'freeThrowsGoals'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'freeThrowAttempts'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'offensiveRebounds'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'defensiveRebounds'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'personalFouls'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 5, 'totalPoints'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'assists'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'turnOvers'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'blocks'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'steals'),      
+                                            (7, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 11, 'minutes'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'fieldGoals'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 6, 'fieldGoalAttempts'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'threePointers'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 5, 'threePointAttempts'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'freeThrowsGoals'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'freeThrowAttempts'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'offensiveRebounds'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'defensiveRebounds'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'personalFouls'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 9, 'totalPoints'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'assists'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'turnOvers'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'blocks'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'steals'),      
+                                            (8, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 22, 'minutes'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'fieldGoals'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 3, 'fieldGoalAttempts'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'threePointers'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'threePointAttempts'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'freeThrowsGoals'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'freeThrowAttempts'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'offensiveRebounds'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 4, 'defensiveRebounds'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'personalFouls'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'totalPoints'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'assists'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 1, 'turnOvers'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 0, 'blocks'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 2, 'steals'),      
+                                            (9, 'Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena', 21, 'minutes');
+
+INSERT INTO TournamentPerformanceScoring (tournamentName, tournamentStart, tournamentEnd, statName, statWeight) VALUES 
+                                            ('WinnerTakeAll','17/2/24','17/3/6', 'fieldGoals', 0.25); 
