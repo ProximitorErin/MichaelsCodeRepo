@@ -18,6 +18,7 @@ import java.io.IOException;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import org.springframework.jdbc.datasource.DataSourceUtils;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -55,30 +56,62 @@ public class HelloController {
     }
 
 	@RequestMapping("/getStatsByDate")
-    public @ResponseBody List<Statistic> getStatsByDate(@RequestParam(value="startDate") String startDate,
-		@RequestParam(value="endDate") String endDate) {
+    public @ResponseBody List<Statistic> getStatsByDate(@RequestParam(value="startDate") String txtStartDate,
+		@RequestParam(value="endDate") String txtEndDate) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
 		List<Statistic> list = new ArrayList<Statistic>();
 		// Leave the blank row here, so we can have a blank row in the combo
 		list.add(new Statistic("", "", null));
-		list.add(new Statistic("Swimming", "Laps", null));
-		list.add(new Statistic("Soccer", "Saves", null));
-        return list;
+
+		// Retrieve the data source from the application context
+		BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+		// Open a database connection using Spring's DataSourceUtils
+		Connection c = DataSourceUtils.getConnection(ds);
+		try {
+			java.util.Date startDate = formatter.parse(txtStartDate);
+			java.util.Date endDate = formatter.parse(txtEndDate);
+			// retrieve a list of three random cities
+			PreparedStatement ps = c.prepareStatement("SELECT a.sportName, a.name as statName "
+					+ "FROM michaelsdb.Stats a "
+					/* + "WHERE sales.CardRecordID = customers.CardRecordID "
+					+ "AND customers.Name = 'Cash Sales' "
+					+ "AND sales.Date BETWEEN ? AND ? "
+					+ "ORDER BY sales.ShipToAddress ASC, sales.Date DESC"*/
+					);
+			//pstmt.setDate(1, new java.sql.Date(startDate.getTime()));
+			//pstmt.setDate(2, new java.sql.Date(endDate.getTime()));
+			
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String sportName = rs.getString("sportName");
+				String statName = rs.getString("statName");
+
+				list.add(new Statistic(sportName, statName, null));
+
+			}
+
+			return list;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return list;
+		} finally {
+			// properly release our connection
+			// ignore failure closing connection
+			try { c.close(); } catch (SQLException e) { return list; }
+		}
+
+		//list.add(new Statistic("Swimming", "Laps", null));
+		//list.add(new Statistic("Soccer", "Saves", null));
+        //
     }
 
 	@RequestMapping("/getTournaments")
     public @ResponseBody List<Tournament> getTournaments() {
-
-		/* SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		java.util.Date startDate = formatter.parse(sdate);
-		java.util.Date endDate = formatter.parse(edate);
-		PreparedStatement pstmt = connection.prepareStatement("SELECT sales.InvoiceNumber, sales.ShipToAddress, sales.Date "
-					+ "FROM sales, customers "
-					+ "WHERE sales.CardRecordID = customers.CardRecordID "
-					+ "AND customers.Name = 'Cash Sales' "
-					+ "AND sales.Date BETWEEN ? AND ? "
-					+ "ORDER BY sales.ShipToAddress ASC, sales.Date DESC");
-		pstmt.setDate(1, new java.sql.Date(startDate.getTime()));
-		pstmt.setDate(2, new java.sql.Date(endDate.getTime()));*/
 
 		List<Tournament> list = new ArrayList<Tournament>();
 		
