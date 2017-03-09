@@ -75,14 +75,15 @@ public class HelloController {
 			java.util.Date endDate = formatter.parse(txtEndDate);
 			// retrieve a list of three random cities
 			PreparedStatement ps = c.prepareStatement("SELECT a.sportName, a.name as statName "
-					+ "FROM michaelsdb.Stats a "
-					/* + "WHERE sales.CardRecordID = customers.CardRecordID "
-					+ "AND customers.Name = 'Cash Sales' "
-					+ "AND sales.Date BETWEEN ? AND ? "
-					+ "ORDER BY sales.ShipToAddress ASC, sales.Date DESC"*/
+					+ "FROM michaelsdb.Stats a, michaelsdb.Sports b "
+					+ "WHERE a.sportName = b.Name "
+					+ "AND b.SeasonStartDate BETWEEN ? AND ? "
+					+ "AND b.SeasonEndDate BETWEEN ? AND ? "
 					);
-			//pstmt.setDate(1, new java.sql.Date(startDate.getTime()));
-			//pstmt.setDate(2, new java.sql.Date(endDate.getTime()));
+			ps.setDate(1, new java.sql.Date(startDate.getTime()));
+			ps.setDate(2, new java.sql.Date(endDate.getTime()));
+			ps.setDate(3, new java.sql.Date(startDate.getTime()));
+			ps.setDate(4, new java.sql.Date(endDate.getTime()));
 			
 			ResultSet rs = ps.executeQuery();
 
