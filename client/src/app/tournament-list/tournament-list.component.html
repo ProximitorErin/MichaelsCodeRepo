@@ -23,7 +23,8 @@
             <td>{{ tournament.teamSize }}</td>
             <td>{{ tournament.teamCount }}</td>
             <td>{{ tournament.username }}</td>
-            <td><input type="button" (click)="delete({{tournament.name}})" value="Delete"/></td>
+            <td><a ng-click="delete(tournament.name)">delete</a></td>
+           <!-- <td><input type="button" (click)="delete({{tournament.name}})" value="Delete"/></td>-->
         </tr>
       </tbody>
     </table>
