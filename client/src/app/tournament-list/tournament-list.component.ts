@@ -14,9 +14,10 @@ export class TournamentListComponent implements OnInit {
 
    }
 
-   delete(tournamentName): void
+   delete(tournament): void
    {
-     console.log("got delete " + tournamentName);
+     console.log("got delete!");
+     console.log(tournament);
    }
 
   ngOnInit() {
