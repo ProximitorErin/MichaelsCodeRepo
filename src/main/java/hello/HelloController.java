@@ -39,6 +39,7 @@ public class HelloController {
 		@RequestParam(value="end") String txtEndDate,
 		@RequestParam(value="size") int size,
 		@RequestParam(value="count") int count,
+		@RequestParam(value="username") String username,
 		@RequestParam(value="stats") String stats)
 	{
 		ObjectMapper mapper = new ObjectMapper();
@@ -67,9 +68,23 @@ public class HelloController {
 				ps.setDate(3, new java.sql.Date(endDate.getTime()));
 				ps.setInt(4, size);
 				ps.setInt(5, count);
-				ps.setString(6, "derekf2");
+				ps.setString(6, username);
 				
 				ps.executeUpdate();
+
+				for (Statistic item : obj) {
+					PreparedStatement ins = c.prepareStatement("INSERT INTO michaelsdb.TournamentPerformanceScoring " +
+					"(tournamentName, tournamentStart, tournamentEnd, sportName, statName, statWeight) "+
+					"VALUES (?, ?, ?, ?, ?, ?)");
+					ins.setString(1, name);
+					ins.setDate(2, new java.sql.Date(startDate.getTime()));
+					ins.setDate(3, new java.sql.Date(endDate.getTime()));
+					ins.setString(4, item.getSportName());
+					ins.setString(5, item.getStatName());
+					float f = Float.parseFloat(item.getWeight());
+					ins.setFloat(6, f);
+					ins.executeUpdate();
+				}
 
 				return "success: " + obj.length;
 
