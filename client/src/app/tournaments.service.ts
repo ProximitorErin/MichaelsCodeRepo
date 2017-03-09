@@ -16,13 +16,14 @@ export class TournamentsService {
 
   constructor(private _http: Http) { }
 
-  createTournament(name: string, start: string, end: string, size: number, count: number, stats: IStatistic[])
+  createTournament(name: string, start: string, end: string, size: number, count: number, stats: IStatistic[], username: string)
   {
     return this._http.get(this._createUrl + '?name=' + name +
       '&start=' + start +
       '&end=' + end +
       '&size=' + size +
       '&count=' + count +
+      '&username=' + username +
       '&stats=' + JSON.stringify(stats))
       .map((response: Response) => <string>response.text())
       .do(data => console.log('All: ' + data))

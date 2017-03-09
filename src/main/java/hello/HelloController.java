@@ -35,23 +35,60 @@ public class HelloController {
 	@RequestMapping("/createTournamentService")
     public @ResponseBody String createTournament (
 		@RequestParam(value="name") String name,
-		@RequestParam(value="start") String start,
-		@RequestParam(value="end") String end,
+		@RequestParam(value="start") String txtStartDate,
+		@RequestParam(value="end") String txtEndDate,
 		@RequestParam(value="size") int size,
 		@RequestParam(value="count") int count,
 		@RequestParam(value="stats") String stats)
 	{
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-		Statistic[] obj = mapper.readValue(stats, Statistic[].class);
-		return "success: " + obj.length;
-	} catch (JsonGenerationException e) {
-    	e.printStackTrace();
-	} catch (JsonMappingException e) {
-    	e.printStackTrace();
-	} catch (IOException e) {
-    	e.printStackTrace();
-	}
+			Statistic[] obj = mapper.readValue(stats, Statistic[].class);
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			List<Statistic> list = new ArrayList<Statistic>();
+
+			// Retrieve the data source from the application context
+			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+			// Open a database connection using Spring's DataSourceUtils
+			Connection c = DataSourceUtils.getConnection(ds);
+			try {
+				java.util.Date startDate = formatter.parse(txtStartDate);
+				java.util.Date endDate = formatter.parse(txtEndDate);
+				// retrieve a list of three random cities
+				PreparedStatement ps = c.prepareStatement("INSERT INTO michaelsdb.Tournaments "
+						+ "(name, startdate, enddate, teamsize, teamcount, adminname) "
+						+ "VALUES (?, ?, ?, ?, ?, ?)"
+						);
+				ps.setString(1, name);
+				ps.setDate(2, new java.sql.Date(startDate.getTime()));
+				ps.setDate(3, new java.sql.Date(endDate.getTime()));
+				ps.setInt(4, size);
+				ps.setInt(5, count);
+				ps.setString(6, "derekf2");
+				
+				ps.executeUpdate();
+
+				return "success: " + obj.length;
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return "failure";
+			} finally {
+				// properly release our connection
+				// ignore failure closing connection
+				try { c.close(); } catch (SQLException e) { return "failure"; }
+			}
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return "failure";
     }
 
@@ -106,9 +143,6 @@ public class HelloController {
 			try { c.close(); } catch (SQLException e) { return list; }
 		}
 
-		//list.add(new Statistic("Swimming", "Laps", null));
-		//list.add(new Statistic("Soccer", "Saves", null));
-        //
     }
 
 	@RequestMapping("/getTournaments")
@@ -148,9 +182,6 @@ public class HelloController {
 			try { c.close(); } catch (SQLException e) { return list; }
 		}
 
-		
-		//list.add(new Tournament("hello", "3/4/73", "6/1/99", 3, 5, "derek"));
-		//list.add(new Tournament("bye", "6/6/66", "7/4/87", 7, 7, "michael"));
         return list;
     }
 

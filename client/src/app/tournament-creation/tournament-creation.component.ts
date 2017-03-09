@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DialogComponent } from '../dialog/dialog.component';
 import { IStatistic } from '../statistic';
 import { TournamentsService } from '../tournaments.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-tournament-creation',
@@ -11,7 +12,8 @@ import { TournamentsService } from '../tournaments.service';
 })
 export class TournamentCreationComponent implements OnInit {
 
-  constructor(private _router: Router, private _tournamentService : TournamentsService) { }
+  constructor(private _router: Router, private _tournamentService : TournamentsService, 
+    private _auth: AuthenticationService) { }
 
   ngOnInit() {
   }
@@ -63,7 +65,7 @@ export class TournamentCreationComponent implements OnInit {
   submit(): void
   {
     this._tournamentService.createTournament(this.tournamentName, this.tournamentStartDate, 
-      this.tournamentEndDate, this.teamSize, this.teamCount, this.chosenStatistics)
+      this.tournamentEndDate, this.teamSize, this.teamCount, this.chosenStatistics, this._auth.getUsername())
         .subscribe(
           data => this.formatResult(data),
           error => this.errorMessage = <any>error
