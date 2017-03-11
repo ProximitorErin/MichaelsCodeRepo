@@ -33,6 +33,9 @@ export class LogonComponent implements OnInit {
     if (this.role == 'admin')
     {
       this._router.navigate(['administrator']);
+    } else if (this.role == 'player') 
+    {
+      this._router.navigate(['player']);
     }
   }
 
