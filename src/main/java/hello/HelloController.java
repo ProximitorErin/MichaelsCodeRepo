@@ -49,7 +49,16 @@ public class HelloController {
 				
 				java.util.Date startDate = formatter.parse(txtStartDate);
 				java.util.Date endDate = formatter.parse(txtEndDate);
-				// retrieve a list of three random cities
+
+				PreparedStatement ins = c.prepareStatement("DELETE FROM michaelsdb.TournamentPerformanceScoring "
+					+ "WHERE NAME = ? "
+						+ "AND StartDate = ? "
+						+ "AND EndDate = ?");
+				ins.setString(1, name);
+				ins.setDate(2, new java.sql.Date(startDate.getTime()));
+				ins.setDate(3, new java.sql.Date(endDate.getTime()));
+				ins.executeUpdate();
+				
 				PreparedStatement ps = c.prepareStatement("DELETE FROM michaelsdb.Tournaments "
 						+ "WHERE NAME = ? "
 						+ "AND StartDate = ? "
@@ -59,20 +68,6 @@ public class HelloController {
 				ps.setDate(3, new java.sql.Date(endDate.getTime()));
 				
 				ps.executeUpdate();
-
-				/* for (Statistic item : obj) {
-					PreparedStatement ins = c.prepareStatement("INSERT INTO michaelsdb.TournamentPerformanceScoring " +
-					"(tournamentName, tournamentStart, tournamentEnd, sportName, statName, statWeight) "+
-					"VALUES (?, ?, ?, ?, ?, ?)");
-					ins.setString(1, name);
-					ins.setDate(2, new java.sql.Date(startDate.getTime()));
-					ins.setDate(3, new java.sql.Date(endDate.getTime()));
-					ins.setString(4, item.getSportName());
-					ins.setString(5, item.getStatName());
-					float f = Float.parseFloat(item.getWeight());
-					ins.setFloat(6, f);
-					ins.executeUpdate();
-				} */
 
 				return "success";
 
