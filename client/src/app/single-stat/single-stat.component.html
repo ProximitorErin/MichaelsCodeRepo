@@ -1,0 +1,21 @@
+  <ul class='nav nav-tabs'>
+    <li><a [routerLink]="['/listCurrentSportAverages']">See Current Sport Averages</a></li>
+    <li><a [routerLink]="['/singleStat']">Statistic Drill Down</a></li>
+  </ul>
+
+ <div class="form-group">
+    <label for="sel1">Statistic Numerator:</label>
+
+    <select class="form-control" [(ngModel)]="sel1">
+      <option *ngFor='let stat of availableStatistics'>{{stat.sportName}}--{{ stat.statName }}</option>
+    </select>
+    
+    <label for="sel2">Statistic Denominator:</label>
+
+    <select class="form-control" [(ngModel)]="sel2">
+      <option *ngFor='let stat of availableStatistics'>{{stat.sportName}}--{{ stat.statName }}</option>
+    </select>
+  </div>
+  <button (click)="analyzeStat()" class="btn">OK</button>
+
+ <p>Analysis: {{answer}}</p>

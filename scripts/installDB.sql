@@ -114,7 +114,7 @@ INSERT INTO Sports (name, seasonStartDate, seasonEndDate) VALUES
 											('softball', '16/02/20','17/5/31');
 
 INSERT INTO Athletes (id, firstName, lastName, sportName, jerseyNumber) VALUES
-                                            (1, "Michael", "Jordan", "basketball", 23),
+                                            (1, "D.J.", "Williams", "basketball", 00),
                                             (2, "Leron", "Black", "basketball", 12),
                                             (3, "Maverick", "Morgan", "basketball", 22),
                                             (4, "Te'Jon", "Lucas", "basketball", 03),

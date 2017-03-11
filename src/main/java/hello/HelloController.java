@@ -30,7 +30,150 @@ public class HelloController {
 	@Autowired
 	private ApplicationContext ctx;
 
-	/* createTournament(size: number, count: number, stats: IStatistic[]) */
+	@RequestMapping("/getSingleAverage")
+    public @ResponseBody String getSingleAverage (
+		@RequestParam(value="sport1") String sport1,
+		@RequestParam(value="stat1") String stat1,
+		@RequestParam(value="sport2") String sport2,
+		@RequestParam(value="stat2") String stat2)
+	{
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			// Retrieve the data source from the application context
+			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+			// Open a database connection using Spring's DataSourceUtils
+			Connection c = DataSourceUtils.getConnection(ds);
+
+			try {
+				
+				PreparedStatement ps = c.prepareStatement("select AVG(A1.scoreMetric)/AVG(A2.scoreMetric) AS answer " +
+        "FROM michaelsdb.AthletePerformanceInEvent as A1, michaelsdb.AthletePerformanceInEvent as A2 " +
+        "WHERE A1.athleteID=A2.athleteID AND A1.eventName=A2.eventName AND A1.date=A2.date AND A1.place=A2.place " +
+            "AND A1.sportName = ? " +
+			"AND A1.statName = ? " +
+			"AND A2.sportName = ? " +
+			"AND A2.statName = ? " +
+            "AND A2.scoreMetric > 0");
+
+				ps.setString(1, sport1);
+				ps.setString(2, stat1);
+				ps.setString(3, sport2);
+				ps.setString(4, stat2);
+				
+				ResultSet rs = ps.executeQuery();
+
+				if (rs.next()) {
+					return rs.getString("answer");
+				} 
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return "failure";
+			} finally {
+				// properly release our connection
+				// ignore failure closing connection
+				try { c.close(); } catch (SQLException e) { return "failure"; }
+			}
+
+			return "failure";
+		
+    }
+
+	@RequestMapping("/increaseTeamCountByOne")
+    public @ResponseBody String increaseTeamCountByOne (
+		@RequestParam(value="name") String name,
+		@RequestParam(value="start") String txtStartDate,
+		@RequestParam(value="end") String txtEndDate)
+	{
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			// Retrieve the data source from the application context
+			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+			// Open a database connection using Spring's DataSourceUtils
+			Connection c = DataSourceUtils.getConnection(ds);
+
+			try {
+				
+				java.util.Date startDate = formatter.parse(txtStartDate);
+				java.util.Date endDate = formatter.parse(txtEndDate);
+				
+				PreparedStatement ps = c.prepareStatement("UPDATE michaelsdb.Tournaments SET teamCount = teamCount + 1 "
+						+ "WHERE NAME = ? "
+						+ "AND StartDate = ? "
+						+ "AND EndDate = ?");
+				ps.setString(1, name);
+				ps.setDate(2, new java.sql.Date(startDate.getTime()));
+				ps.setDate(3, new java.sql.Date(endDate.getTime()));
+				
+				ps.executeUpdate();
+
+				return "success";
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return "failure";
+			} finally {
+				// properly release our connection
+				// ignore failure closing connection
+				try { c.close(); } catch (SQLException e) { return "failure"; }
+			}
+		
+    }
+
+	@RequestMapping("/deleteTournament")
+    public @ResponseBody String deleteTournament (
+		@RequestParam(value="name") String name,
+		@RequestParam(value="start") String txtStartDate,
+		@RequestParam(value="end") String txtEndDate)
+	{
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			// Retrieve the data source from the application context
+			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+			// Open a database connection using Spring's DataSourceUtils
+			Connection c = DataSourceUtils.getConnection(ds);
+
+			try {
+				
+				java.util.Date startDate = formatter.parse(txtStartDate);
+				java.util.Date endDate = formatter.parse(txtEndDate);
+
+				PreparedStatement ins = c.prepareStatement("DELETE FROM michaelsdb.TournamentPerformanceScoring "
+					+ "WHERE TournamentName = ? "
+						+ "AND tournamentStart = ? "
+						+ "AND tournamentEnd = ?");
+				ins.setString(1, name);
+				ins.setDate(2, new java.sql.Date(startDate.getTime()));
+				ins.setDate(3, new java.sql.Date(endDate.getTime()));
+				ins.executeUpdate();
+				
+				PreparedStatement ps = c.prepareStatement("DELETE FROM michaelsdb.Tournaments "
+						+ "WHERE NAME = ? "
+						+ "AND StartDate = ? "
+						+ "AND EndDate = ?");
+				ps.setString(1, name);
+				ps.setDate(2, new java.sql.Date(startDate.getTime()));
+				ps.setDate(3, new java.sql.Date(endDate.getTime()));
+				
+				ps.executeUpdate();
+
+				return "success";
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return "failure";
+			} finally {
+				// properly release our connection
+				// ignore failure closing connection
+				try { c.close(); } catch (SQLException e) { return "failure"; }
+			}
+		
+    }
 
 	@RequestMapping("/createTournamentService")
     public @ResponseBody String createTournament (
@@ -185,6 +328,50 @@ public class HelloController {
 				String adminName = rs.getString("adminName");
 
 				list.add(new Tournament(name, startDate, endDate, teamSize, teamCount, adminName));
+
+			}
+
+		} catch (SQLException ex) {
+			// something has failed and we print a stack trace to analyse the error
+			return list;
+		} finally {
+			// properly release our connection
+			// ignore failure closing connection
+			try { c.close(); } catch (SQLException e) { return list; }
+		}
+
+        return list;
+    }
+
+	@RequestMapping("/getCurrentSportAverages")
+    public @ResponseBody List<CurrentSportAverage> getCurrentSportAverages() {
+
+		List<CurrentSportAverage> list = new ArrayList<CurrentSportAverage>();
+		
+		// Retrieve the data source from the application context
+		BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+		// Open a database connection using Spring's DataSourceUtils
+		Connection c = DataSourceUtils.getConnection(ds);
+		try {
+			// retrieve a list of three random cities
+			PreparedStatement ps = c.prepareStatement(
+				"select sportName, statName AS statistic, (SELECT TRUNCATE(AVG(A1.scoreMetric)/AVG(A2.scoreMetric),3) "
+                +"FROM michaelsdb.AthletePerformanceInEvent AS A1, michaelsdb.AthletePerformanceInEvent AS A2 "
+                +"WHERE A1.athleteID=A2.athleteID AND A1.eventName=A2.eventName "
+                +"AND A1.date=A2.date AND A1.place=A2.place AND statistic=A1.statName and "
+                +"((A1.sportName = 'basketball' AND A2.statName = 'minutes') OR "
+                +"(A1.sportName='softball' AND A2.statName = 'atBats')) "
+                +"AND A2.scoreMetric > 0) AS SportAverage "
+       			+"FROM michaelsdb.AthletePerformanceInEvent ORDER by sportName, statistic");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String sportName = rs.getString("sportName");
+				String statistic = rs.getString("statistic");
+				//todo: Add the stat value, once it is fixed
+
+				list.add(new CurrentSportAverage(sportName, statistic, 0));
 
 			}
 
