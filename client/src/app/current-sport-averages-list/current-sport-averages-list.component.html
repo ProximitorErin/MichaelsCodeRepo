@@ -1,0 +1,23 @@
+  <ul class='nav nav-tabs'>
+    <li><a [routerLink]="['/listCurrentSportAverages']">See Current Sport Averages</a></li>
+    <li><a [routerLink]="['/listTournaments']">Advanced Query #2</a></li>
+  </ul>
+  <div class='table-responsive'>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Sport Name</th>
+          <th>Stat Name</th>
+          <th>Average</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let stat of stats'>
+            <td>{{ stat.sportName }}</td>
+            <td>{{ stat.statName }}</td>
+            <td>{{ stat.statValue }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
