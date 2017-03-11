@@ -16,6 +16,17 @@ export class AdvancedService {
       .catch(this.handleError);
   }
 
+  getSingleAverage(sportName1: string, statName1: string, sportName2: string, statName2: string)
+  {
+      return this._http.get(this._advancedSql2Url+ '?sport1=' + sportName1 +
+        '&stat1=' + statName1 +
+        '&sport2=' + sportName2 +
+        '&stat2=' + statName2)
+        .map((response: Response) => <string>response.text())
+        .do(data => console.log('All: ' + data))
+        .catch(this.handleError);
+  }
+
   private handleError(error: Response)
   {
     console.error('tournament service error:' + error);
@@ -23,5 +34,6 @@ export class AdvancedService {
   }
 
   private _advancedSql1Url = '/getCurrentSportAverages';
+  private _advancedSql2Url = '/getSingleAverage';
 
 }

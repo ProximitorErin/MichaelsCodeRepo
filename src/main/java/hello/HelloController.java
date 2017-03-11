@@ -30,6 +30,56 @@ public class HelloController {
 	@Autowired
 	private ApplicationContext ctx;
 
+	@RequestMapping("/getSingleAverage")
+    public @ResponseBody String getSingleAverage (
+		@RequestParam(value="sport1") String sport1,
+		@RequestParam(value="stat1") String stat1,
+		@RequestParam(value="sport2") String sport2,
+		@RequestParam(value="stat2") String stat2)
+	{
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			// Retrieve the data source from the application context
+			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+			// Open a database connection using Spring's DataSourceUtils
+			Connection c = DataSourceUtils.getConnection(ds);
+
+			try {
+				
+				PreparedStatement ps = c.prepareStatement("select AVG(A1.scoreMetric)/AVG(A2.scoreMetric) AS answer " +
+        "FROM michaelsdb.AthletePerformanceInEvent as A1, michaelsdb.AthletePerformanceInEvent as A2 " +
+        "WHERE A1.athleteID=A2.athleteID AND A1.eventName=A2.eventName AND A1.date=A2.date AND A1.place=A2.place " +
+            "AND A1.sportName = ? " +
+			"AND A1.statName = ? " +
+			"AND A2.sportName = ? " +
+			"AND A2.statName = ? " +
+            "AND A2.scoreMetric > 0");
+
+				ps.setString(1, sport1);
+				ps.setString(2, stat1);
+				ps.setString(3, sport2);
+				ps.setString(4, stat2);
+				
+				ResultSet rs = ps.executeQuery();
+
+				if (rs.next()) {
+					return rs.getString("answer");
+				} 
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return "failure";
+			} finally {
+				// properly release our connection
+				// ignore failure closing connection
+				try { c.close(); } catch (SQLException e) { return "failure"; }
+			}
+
+			return "failure";
+		
+    }
+
 	@RequestMapping("/increaseTeamCountByOne")
     public @ResponseBody String increaseTeamCountByOne (
 		@RequestParam(value="name") String name,
@@ -74,7 +124,7 @@ public class HelloController {
     }
 
 	@RequestMapping("/deleteTournament")
-    public @ResponseBody String createTournament (
+    public @ResponseBody String deleteTournament (
 		@RequestParam(value="name") String name,
 		@RequestParam(value="start") String txtStartDate,
 		@RequestParam(value="end") String txtEndDate)
