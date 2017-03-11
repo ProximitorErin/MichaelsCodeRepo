@@ -13,3 +13,13 @@ select AVG(A1.scoreMetric)/AVG(A2.scoreMetric)
         WHERE A1.athleteID=A2.athleteID AND A1.eventName=A2.eventName AND A1.date=A2.date AND A1.place=A2.place
         AND A1.sportName = 'softball' AND A1.statName = "hits" AND A2.statName = "atBats" AND A2.scoreMetric > 0;
         
+# Returns table of sportname, statistic, average of that statistic divided by (atBats or minutes)
+
+select DISTINCT sportName, statName AS statistic, (SELECT TRUNCATE(AVG(A1.scoreMetric)/AVG(A2.scoreMetric),3) AS SportAverage 
+                                                   FROM athletePerformanceInEvent AS A1, athletePerformanceInEvent AS A2 
+                                                   WHERE A1.athleteID=A2.athleteID AND A1.eventName=A2.eventName 
+                                                        AND A1.date=A2.date AND A1.place=A2.place AND statistic=A1.statName and 
+                                                        ((A1.sportName = 'basketball' AND A2.statName = 'minutes') OR 
+                                                                (A1.sportName='softball' AND A2.statName = 'atBats')) 
+                                                        AND A2.scoreMetric > 0) 
+       FROM athletePerformanceInEvent ORDER by sportName, statistic;
