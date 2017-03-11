@@ -52,8 +52,8 @@ public class HelloController {
 
 				PreparedStatement ins = c.prepareStatement("DELETE FROM michaelsdb.TournamentPerformanceScoring "
 					+ "WHERE TournamentName = ? "
-						+ "AND StartDate = ? "
-						+ "AND EndDate = ?");
+						+ "AND tournamentStart = ? "
+						+ "AND tournamentEnd = ?");
 				ins.setString(1, name);
 				ins.setDate(2, new java.sql.Date(startDate.getTime()));
 				ins.setDate(3, new java.sql.Date(endDate.getTime()));
