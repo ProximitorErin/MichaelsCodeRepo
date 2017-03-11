@@ -16,6 +16,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { TournamentUpdateComponent } from './tournament-update/tournament-update.component';
 import { PlayerComponent } from './player/player.component';
 import { CurrentSportAveragesListComponent } from './current-sport-averages-list/current-sport-averages-list.component';
+import { SingleStatComponent } from './single-stat/single-stat.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CurrentSportAveragesListComponent } from './current-sport-averages-list
     DialogComponent,
     TournamentUpdateComponent,
     PlayerComponent,
-    CurrentSportAveragesListComponent
+    CurrentSportAveragesListComponent,
+    SingleStatComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { CurrentSportAveragesListComponent } from './current-sport-averages-list
       { path: 'listTournaments', component: TournamentListComponent },
       { path: 'player', component: PlayerComponent },
       { path: 'listCurrentSportAverages', component: CurrentSportAveragesListComponent }, 
+      { path: 'singleStat', component: SingleStatComponent },
       { path: '', component: LogonComponent }
     ])
   ],
