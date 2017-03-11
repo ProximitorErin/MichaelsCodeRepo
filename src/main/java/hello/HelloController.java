@@ -30,7 +30,69 @@ public class HelloController {
 	@Autowired
 	private ApplicationContext ctx;
 
-	/* createTournament(size: number, count: number, stats: IStatistic[]) */
+	@RequestMapping("/deleteTournament")
+    public @ResponseBody String createTournament (
+		@RequestParam(value="name") String name,
+		@RequestParam(value="start") String txtStartDate,
+		@RequestParam(value="end") String txtEndDate)
+	{
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			// Retrieve the data source from the application context
+			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+			// Open a database connection using Spring's DataSourceUtils
+			Connection c = DataSourceUtils.getConnection(ds);
+
+			try {
+				
+				java.util.Date startDate = formatter.parse(txtStartDate);
+				java.util.Date endDate = formatter.parse(txtEndDate);
+				// retrieve a list of three random cities
+				PreparedStatement ps = c.prepareStatement("DELETE FROM michaelsdb.Tournaments "
+						+ "WHERE NAME = ? "
+						+ "AND StartDate = ? "
+						+ "AND EndDate = ?");
+				ps.setString(1, name);
+				ps.setDate(2, new java.sql.Date(startDate.getTime()));
+				ps.setDate(3, new java.sql.Date(endDate.getTime()));
+				
+				ps.executeUpdate();
+
+				/* for (Statistic item : obj) {
+					PreparedStatement ins = c.prepareStatement("INSERT INTO michaelsdb.TournamentPerformanceScoring " +
+					"(tournamentName, tournamentStart, tournamentEnd, sportName, statName, statWeight) "+
+					"VALUES (?, ?, ?, ?, ?, ?)");
+					ins.setString(1, name);
+					ins.setDate(2, new java.sql.Date(startDate.getTime()));
+					ins.setDate(3, new java.sql.Date(endDate.getTime()));
+					ins.setString(4, item.getSportName());
+					ins.setString(5, item.getStatName());
+					float f = Float.parseFloat(item.getWeight());
+					ins.setFloat(6, f);
+					ins.executeUpdate();
+				} */
+
+				return "success";
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return "failure";
+			} finally {
+				// properly release our connection
+				// ignore failure closing connection
+				try { c.close(); } catch (SQLException e) { return "failure"; }
+			}
+		/* catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} */
+		
+    }
 
 	@RequestMapping("/createTournamentService")
     public @ResponseBody String createTournament (
