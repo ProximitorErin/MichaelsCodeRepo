@@ -51,7 +51,7 @@ public class HelloController {
 				java.util.Date endDate = formatter.parse(txtEndDate);
 
 				PreparedStatement ins = c.prepareStatement("DELETE FROM michaelsdb.TournamentPerformanceScoring "
-					+ "WHERE NAME = ? "
+					+ "WHERE TournamentName = ? "
 						+ "AND StartDate = ? "
 						+ "AND EndDate = ?");
 				ins.setString(1, name);
