@@ -14,8 +14,19 @@ export class TournamentsService {
   private _statsUrl = '/getStatsByDate';
   private _createUrl = '/createTournamentService';
   private _deleteUrl = '/deleteTournament';
+  private _incrementUrl = '/increaseTeamCountByOne';
 
   constructor(private _http: Http) { }
+
+  incrementTournament(name: string, start: string, end: string)
+  {
+    return this._http.get(this._incrementUrl + '?name=' + name +
+      '&start=' + start +
+      '&end=' + end)
+      .map((response: Response) => <string>response.text())
+      .do(data => console.log('All: ' + data))
+      .catch(this.handleError);
+  }
 
   deleteTournament(name: string, start: string, end: string)
   {

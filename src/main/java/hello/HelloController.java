@@ -362,21 +362,22 @@ public class HelloController {
                 "AND A1.date=A2.date AND A1.place=A2.place AND statistic=A1.statName and "+
                 "((A1.sportName = 'basketball' AND A2.statName = 'minutes') OR "+
                 "(A1.sportName='softball' AND A2.statName = 'atBats')) "+
-                "AND A2.scoreMetric > 0) "+
+                "AND A2.scoreMetric > 0) AS SA "+
        			"FROM AthletePerformanceInEvent ORDER by sportName, statistic");
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				String sportName = rs.getString("sportName");
 				String statistic = rs.getString("statistic");
-				//todo: Add the stat value, once it is fixed
+				float val = rs.getFloat("SA");
 
-				list.add(new CurrentSportAverage(sportName, statistic, 0));
+				list.add(new CurrentSportAverage(sportName, statistic, val));
 
 			}
 
 		} catch (SQLException ex) {
 			// something has failed and we print a stack trace to analyse the error
+			ex.printStackTrace();
 			return list;
 		} finally {
 			// properly release our connection

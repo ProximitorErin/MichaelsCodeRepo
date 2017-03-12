@@ -26,11 +26,6 @@ export class TournamentListComponent implements OnInit {
         tournaments => this.tournaments = tournaments,
         error => this.errorMessage = <any>error
       );
-    
-    /* if (this.answer.indexOf("success") > -1)
-    {
-      this._router.navigate(['administrator']);
-    }*/ 
   }
 
    delete(tournament: ITournament): void
@@ -48,6 +43,20 @@ export class TournamentListComponent implements OnInit {
 
     console.log('vals: ' + tournament.name, tournament.startDate, 
       tournament.endDate, tournament.teamSize, tournament.teamCount, this._auth.getUsername());
+   }
+
+   addOne(tournament: ITournament): void
+   {
+     console.log("got addOne!");
+     console.log(tournament);
+
+     this._tournamentService.incrementTournament(tournament.name, tournament.startDate, 
+      tournament.endDate)
+        .subscribe(
+          data => this.formatResult(data),
+          error => this.errorMessage = <any>error
+        );
+
    }
 
   ngOnInit() {

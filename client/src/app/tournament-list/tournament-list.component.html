@@ -24,6 +24,7 @@
             <td>{{ tournament.teamCount }}</td>
             <td>{{ tournament.username }}</td>
             <td><a [routerLink]="['/listTournaments']" (click)="delete(tournament);">delete</a></td>
+            <td><a [routerLink]="['/listTournaments']" (click)="addOne(tournament);">enlarge</a></td>
         </tr>
       </tbody>
     </table>
