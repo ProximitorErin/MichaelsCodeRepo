@@ -15,7 +15,7 @@ export class SingleStatComponent implements OnInit {
   ngOnInit() {
     if (this.availableStatistics == null)
     {
-      this._tournamentService.getStatsForDates("2001-01-01", "2099-12-31")
+      this._tournamentService.getStatsForDates("2017-02-24", "2017-3-3")
         .subscribe(
           availableStats => this.availableStatistics = availableStats,
           error => this.errorMessage = <any>error
