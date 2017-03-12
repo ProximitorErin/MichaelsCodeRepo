@@ -167,7 +167,7 @@ INSERT INTO Stats (name, sportName) VALUES
 											('walks','softball'),
 											('strikeouts','softball'),
 											('putouts','softball'),
-											('a','softball'),
+											('assists','softball'),
 											('leftonbase','softball');
 
 INSERT INTO Tournaments (name, startDate, endDate, adminName) VALUES ('WinnerTakeAll','17/2/24','17/3/6','gryk2');
