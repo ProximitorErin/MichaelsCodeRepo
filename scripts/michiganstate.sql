@@ -1,4 +1,4 @@
-use michaelsdb:
+use michaelsdb;
 
 Insert into Events (name, date, time, place) VALUES ('Michigan State', '2017/3/01', '20:00', 'State Farm Center');
 
