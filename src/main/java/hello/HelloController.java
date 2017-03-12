@@ -356,14 +356,14 @@ public class HelloController {
 		try {
 			// retrieve a list of three random cities
 			PreparedStatement ps = c.prepareStatement(
-				"select sportName, statName AS statistic, (SELECT TRUNCATE(AVG(A1.scoreMetric)/AVG(A2.scoreMetric),3) "
-                +"FROM michaelsdb.AthletePerformanceInEvent AS A1, michaelsdb.AthletePerformanceInEvent AS A2 "
-                +"WHERE A1.athleteID=A2.athleteID AND A1.eventName=A2.eventName "
-                +"AND A1.date=A2.date AND A1.place=A2.place AND statistic=A1.statName and "
-                +"((A1.sportName = 'basketball' AND A2.statName = 'minutes') OR "
-                +"(A1.sportName='softball' AND A2.statName = 'atBats')) "
-                +"AND A2.scoreMetric > 0) AS SportAverage "
-       			+"FROM michaelsdb.AthletePerformanceInEvent ORDER by sportName, statistic");
+				"select DISTINCT sportName, statName AS statistic, (SELECT TRUNCATE(AVG(A1.scoreMetric)/AVG(A2.scoreMetric),3) AS SportAverage "+
+                "FROM AthletePerformanceInEvent AS A1, AthletePerformanceInEvent AS A2 "+
+                "WHERE A1.athleteID=A2.athleteID AND A1.eventName=A2.eventName "+
+                "AND A1.date=A2.date AND A1.place=A2.place AND statistic=A1.statName and "+
+                "((A1.sportName = 'basketball' AND A2.statName = 'minutes') OR "+
+                "(A1.sportName='softball' AND A2.statName = 'atBats')) "+
+                "AND A2.scoreMetric > 0) "+
+       			"FROM AthletePerformanceInEvent ORDER by sportName, statistic");
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
