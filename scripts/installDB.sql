@@ -156,7 +156,7 @@ INSERT INTO Events (name, date, time, place) VALUES ('Nebraska','17/2/26','18:36
 													('Georgia Tech 1', '17/2/10', '11:30', 'Puerto Rican Stadium'),
 													('Georgia Tech 2', '17/2/11', '12:30', 'Puerto Rican National'),
 													('Georgia Tech 3', '17/2/26', '13:00', 'Mewborn Field'),
-													('North Carolina 1', '17/2/10', '10:00', 'Estadio Donna Terry', ),
+													('North Carolina 1', '17/2/10', '10:00', 'Estadio Donna Terry'),
 													('Illinois State', '17/3/3', '12:00', 'Tiger Park'),
 													('Kennesaw State 1', '17/2/25', '13:00', 'Bailey Park'),
 													('Kennesaw State 2', '17/2/25', '16:50', 'Bailey Park'),
