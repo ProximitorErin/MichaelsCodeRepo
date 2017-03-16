@@ -11,6 +11,7 @@ CREATE TABLE Sports (
     name             VARCHAR(32) NOT NULL, #longest illini sport name: "Wheelchair basketball" so 32 char
     seasonStartDate  DATE NOT NULL,
     seasonEndDate    DATE NOT NULL,
+    normalStat       VARCHAR(32),	#normalization stat for the sport. i.e., basketball -> minutes
     PRIMARY KEY (name)
 );
 
@@ -109,9 +110,9 @@ INSERT INTO Users (name, password, email, isAdmin) VALUES
                                             ('liacopo2', 'liacopo2', 'liacopo2@illinois.edu', 0), 
                                             ('mwalsh34', 'mwalsh34', 'mwalsh34@illinois.edu', 0);
                                  
-INSERT INTO Sports (name, seasonStartDate, seasonEndDate) VALUES 
-											('basketball', '16/10/3', '17/4/4'),
-											('softball', '16/02/20','17/5/31');
+INSERT INTO Sports (name, seasonStartDate, seasonEndDate, normalStat) VALUES 
+											('basketball', '16/10/30', '17/3/4','minutes'),
+											('softball', '17/02/10','17/5/07','atBats');
 
 INSERT INTO Athletes (id, firstName, lastName, sportName, jerseyNumber) VALUES
                                             (1, "D.J.", "Williams", "basketball", 00),
