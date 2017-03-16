@@ -124,7 +124,7 @@ INSERT INTO Athletes (id, firstName, lastName, sportName, jerseyNumber) VALUES
                                             (7, "Kipper", "Nichols", "basketball", 02),
                                             (8, "Jalen", "Coleman-Lands", "basketball", 05),
                                             (9, "Michael", "Finke", "basketball", 43);
-INSERT INTO Athletes (id, firstName, lastName, hometown, class, sportName, jerseyNumber) VALUES
+INSERT INTO Athletes (id, firstName, lastName, picture, hometown, class, sportName, jerseyNumber) VALUES
                                            (10, "Kiana", "Sherlund", "http://www.fightingillini.com/images/2016/12/16/Sherlund_Kiana_2MJ0703.jpg", "Fairfax, VA", "So.", "softball", 6),
                                            (11, "Alyssa", "Gunther", "http://www.fightingillini.com/images/2016/12/16/Gunther_Alyssa_2MJ0750.jpg", "Tinley Park, IL", "Sr.", "softball", 2),
                                            (12, "Annie", "Flemming", "http://www.fightingillini.com/images/2016/12/16/Fleming_Annie_2MJ0663.jpg", "Chillicothe, IL", "Jr.", "softball", 99),
