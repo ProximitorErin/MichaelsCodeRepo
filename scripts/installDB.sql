@@ -124,7 +124,7 @@ INSERT INTO Athletes (id, firstName, lastName, sportName, jerseyNumber) VALUES
                                             (8, "Jalen", "Coleman-Lands", "basketball", 05),
                                             (9, "Michael", "Finke", "basketball", 43);
 INSERT INTO Athletes (id, firstName, lastName, sportName) VALUES
-											(10, "Kiana", "Sherland", "softball"),
+											(10, "Kiana", "Sherlund", "softball"),
 											(11, "Alyssa", "Gunther", "softball"),
 											(12, "Annie", "Flemming", "softball"),
 											(13, "Nicole", "Evans", "softball"),
@@ -139,7 +139,12 @@ INSERT INTO Athletes (id, firstName, lastName, sportName) VALUES
 											(22, "Maddi", "Doane", "softball"),
 											(23, "Breanna", "Wonderly", "softball"),
 											(24, "Danielle", "Brochu", "softball"),
-											(25, "Taylor", "Edwards", "softball");
+											(25, "Taylor", "Edwards", "softball"),
+											(26, "Akilah", "Mouzon", "softball"),
+											(27, "Alexis", "Carillo", "softball"),
+											(28, "Erin", "Walker", "softball"),
+											(29, "Hanna", "Nilsen", "softball"),
+											(30, "Katie", "Gallagher", "softball");
 
 INSERT INTO Events (name, date, time, place) VALUES ('Nebraska','17/2/26','18:36:00','Pinnacle Bank Arena'),
 													('Georgia Tech', '17/2/26','12:00:00','Mewborn Field');
