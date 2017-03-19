@@ -114,16 +114,25 @@ INSERT INTO Sports (name, seasonStartDate, seasonEndDate, normalStat) VALUES
 											('basketball', '16/10/30', '17/3/4','minutes'),
 											('softball', '17/02/10','17/5/07','atBats');
 
-INSERT INTO Athletes (id, firstName, lastName, sportName, jerseyNumber) VALUES
-                                            (1, "D.J.", "Williams", "basketball", 00),
-                                            (2, "Leron", "Black", "basketball", 12),
-                                            (3, "Maverick", "Morgan", "basketball", 22),
-                                            (4, "Te'Jon", "Lucas", "basketball", 03),
-                                            (5, "Tracy", "Abrams", "basketball", 13),
-                                            (6, "Malcolm", "Hill", "basketball", 21),
-                                            (7, "Kipper", "Nichols", "basketball", 02),
-                                            (8, "Jalen", "Coleman-Lands", "basketball", 05),
-                                            (9, "Michael", "Finke", "basketball", 43);
+INSERT INTO Athletes (id, firstName, lastName, picture, hometown, class, sportName, jerseyNumber) VALUES
+                                            (1, "D.J.", "Williams", "http://www.fightingillini.com/images/2016/9/1/Williams_DJ_Headshot_082116_2MJ0870.JPG", "Chicago, IL", "So.", "basketball", 00),
+                                            (2, "Leron", "Black", "http://www.fightingillini.com/images/2016/9/1/Black_Leron_Headshot_082116_2MJ0847_35.JPG", "Memphis, TN", "R-So.", "basketball", 12),
+                                            (3, "Maverick", "Morgan", "http://www.fightingillini.com/images/2016/9/1/Morgan_Maverick_Headshot_082116_2MJ0875.JPG", "Springboro, OH", "Sr.", "basketball", 22),
+                                            (4, "Te'Jon", "Lucas", "http://www.fightingillini.com/images/2016/9/1/Lucas_Tejon_Headshot_082116_2MJ0901.JPG", "Milwaukee, WI", "Fr.", "basketball", 03),
+                                            (5, "Tracy", "Abrams", "http://www.fightingillini.com/images/2016/9/1/Abrams_Tracy_Headshot_082116_2MJ0868_49.JPG", "Chicago, IL", "Gr.", "basketball", 13),
+                                            (6, "Malcolm", "Hill", "http://www.fightingillini.com/images/2016/9/1/Hill_Malcolm_Headshot_082116_2MJ0886.JPG", "Fairview Heights, IL", "Sr.", "basketball", 21),
+                                            (7, "Kipper", "Nichols", "http://www.fightingillini.com/images/2016/9/1/Nichols_Kipper_Headshot_082116_2MJ0907.JPG", "Cleveland, OH", "R-Fr.", "basketball", 02),
+                                            (8, "Jalen", "Coleman-Lands", "http://www.fightingillini.com/images/2016/9/1/Coleman_Lands_Jalen_Headshot_082116_2MJ0839.JPG", "Indianapolis, IN", "So.", "basketball", 05),
+                                            (9, "Michael", "Finke", "http://www.fightingillini.com/images/2016/9/1/Finke_Michael_Headshot_082116_2MJ0893.JPG", "Champaign, IL", "R-So.", "basketball", 43),
+											(34, "Jaylon", "Tate", "http://www.fightingillini.com/images/2016/9/1/Tate_Jaylon_Headshot_082116_2MJ0892.JPG", "Chicago, IL", "So.", "basketball", 01),
+											(35, "Drew", "Cayce", "http://www.fightingillini.com/images/2016/9/1/Cayce_Drew_Headshot_082116_2MJ0915.JPG", "Libertyville, IL", "So.", "basketball", 10),
+											(36, "Aaron", "Jordan", "http://www.fightingillini.com/images/2016/9/1/Jordan_Aaron_Headshot_082116_2MJ0851.JPG", "Plainfield, IL", "So.", "basketball", 23),
+											(37, "Mike", "Thorne Jr.", "http://www.fightingillini.com/images/2016/9/1/Thorne_Jr_Mike_Headshot_082116_2MJ0919.JPG", "Fayetteville, NC", "Gr.", "basketball", 33),
+											(38, "Samson", "Oladimeji", "http://www.fightingillini.com/images/2016/9/1/Liss_Cameron_Headshot_082116_2MJ0841_44.JPG", "Rolling Meadows, IL", "Fr.", "basketball", 35),
+											(39, "Clayton", "Jones", "http://www.fightingillini.com/images/2016/9/1/Jones_Clayton_Headshot_082116_2MJ0928.JPG", "Champaign, IL", "Jr.", "basketball", 41),
+											(40, "Alex", "Austin", "http://www.fightingillini.com/images/2016/9/1/Austin_Alex_Headshot_082116_2MJ0857.JPG", "Chicago, IL", "R-Sr.", "basketball", 44),
+											(41, "Cameron", "Liss", "http://www.fightingillini.com/images/2016/9/1/Liss_Cameron_Headshot_082116_2MJ0841_44.JPG", "Northbrook, IL", "Jr.", "basketball", 45);
+											
 INSERT INTO Athletes (id, firstName, lastName, picture, hometown, class, sportName, jerseyNumber) VALUES
                                            (10, "Kiana", "Sherlund", "http://www.fightingillini.com/images/2016/12/16/Sherlund_Kiana_2MJ0703.jpg", "Fairfax, VA", "So.", "softball", 6),
                                            (11, "Alyssa", "Gunther", "http://www.fightingillini.com/images/2016/12/16/Gunther_Alyssa_2MJ0750.jpg", "Tinley Park, IL", "Sr.", "softball", 2),
