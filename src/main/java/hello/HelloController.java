@@ -467,7 +467,7 @@ public class HelloController {
 
 	}
 
-    @RequestMapping("/")
+    /* @RequestMapping("/")
     public String index() {
     	
     	String dbPassword = System.getenv("DB_PASSWORD");
@@ -496,6 +496,6 @@ public class HelloController {
 		findings += "clean!";
 		
         return "Greetings 7 from Spring Boot: " + findings;
-    }
+    } */
 
 }
