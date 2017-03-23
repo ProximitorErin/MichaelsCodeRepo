@@ -21,6 +21,8 @@ import { AthleteSelectionComponent } from './athlete-selection/athlete-selection
 import { Carousel } from './carousel/carousel.component';
 import { Slide } from './slide/slide.component';
 
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { Slide } from './slide/slide.component';
   ],
   imports: [
     BrowserModule,
+    ChartsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
