@@ -22,6 +22,7 @@ import { Carousel } from './carousel/carousel.component';
 import { Slide } from './slide/slide.component';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { LineChartDemoComponentComponent } from './line-chart-demo-component/line-chart-demo-component.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     SingleStatComponent,
     AthleteSelectionComponent,
     Carousel,
-    Slide
+    Slide,
+    LineChartDemoComponentComponent
   ],
   imports: [
     BrowserModule,
