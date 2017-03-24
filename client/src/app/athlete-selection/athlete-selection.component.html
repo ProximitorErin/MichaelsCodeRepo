@@ -1,8 +1,9 @@
 <p>
   Put top text here
-  <carousel [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">
-    <table>
+  <table>
                                    <td>
+  <carousel [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">
+    
                           <slide *ngFor="let slidez of slides; let index=index"
                                  [active]="slidez.active">
                                  
@@ -14,10 +15,11 @@
                                    
                             
                           </slide>
-                          </td>
+                          
+                        </carousel>
+                        </td>
                                    <td>
                                      <app-line-chart-demo-component></app-line-chart-demo-component>
                                      </td>
 </table>
-                        </carousel>
 </p>
