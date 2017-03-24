@@ -1,20 +1,23 @@
 <p>
   Put top text here
   <carousel [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">
+    <table>
+                                   <td>
                           <slide *ngFor="let slidez of slides; let index=index"
                                  [active]="slidez.active">
-                                 <table>
-                                   <td>
+                                 
                               <img [src]="slidez.image" style="margin:auto;">
                             <div class="carousel-caption">
                               <h3 style="background-color: transparent;color: white;">Slide {{index + 1}}</h3>
                               <p  style="background-color: transparent;color: white;">{{slidez.text}}</p>
                             </div>
-                                   </td>
+                                   
+                            
+                          </slide>
+                          </td>
                                    <td>
                                      <app-line-chart-demo-component></app-line-chart-demo-component>
                                      </td>
-                            </table>
-                          </slide>
+</table>
                         </carousel>
 </p>
