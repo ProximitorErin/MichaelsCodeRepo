@@ -9,6 +9,7 @@ import { AdministratorComponent } from './administrator/administrator.component'
 import { LogonComponent } from './logon/logon.component';
 import { AuthenticationService } from './authentication.service';
 import { AdvancedService } from './advanced.service';
+import { AthletePerformanceService } from './athlete-performance.service';
 import { TournamentsService } from './tournaments.service';
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
 import { TournamentCreationComponent } from './tournament-creation/tournament-creation.component';
@@ -58,7 +59,7 @@ import { LineChartDemoComponentComponent } from './line-chart-demo-component/lin
       { path: '', component: LogonComponent }
     ])
   ],
-  providers: [ AuthenticationService, TournamentsService, AdvancedService ],
+  providers: [ AuthenticationService, TournamentsService, AdvancedService, AthletePerformanceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

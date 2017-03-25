@@ -1,5 +1,6 @@
 import {Component, OnDestroy, Input} from '@angular/core';
 import {Slide} from '../slide/slide.component';
+import { AthletePerformanceService } from '../athlete-performance.service';
 
 export enum Direction {UNKNOWN, NEXT, PREV}
 
@@ -24,10 +25,9 @@ export class Carousel {
   @Input() public get interval(): number {
     return this._interval;
   }
-
-    constructor() {
-         console.log("Carousel created");       
-    }
+  constructor(private _performanceService: AthletePerformanceService) {
+    
+   }
 
   public set interval(value: number) {
     this._interval = value;
@@ -48,6 +48,8 @@ export class Carousel {
     if (nextSlide && nextSlide !== this.currentSlide) {
       this.goNext(nextSlide, direction);
     }
+
+    this._performanceService.charter.randomize();
   }
 
   private goNext(slide: Slide, direction: Direction) {

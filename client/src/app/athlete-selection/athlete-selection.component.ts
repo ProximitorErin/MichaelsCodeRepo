@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AthleteSelectionComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit() {
     this.addNewSlide();
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AthletePerformanceService } from '../athlete-performance.service';
 
 @Component({
   selector: 'app-line-chart-demo-component',
@@ -6,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./line-chart-demo-component.component.css']
 })
 export class LineChartDemoComponentComponent implements OnInit {
+
+  constructor(private _performanceService: AthletePerformanceService) {
+    _performanceService.charter = this;
+   }
 
   ngOnInit() {
   }
