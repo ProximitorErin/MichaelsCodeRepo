@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TournamentsService } from '../tournaments.service';
+import { IAthlete } from '../Athlete';
 
 @Component({
   selector: 'app-athlete-selection',
@@ -6,6 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./athlete-selection.component.css']
 })
 export class AthleteSelectionComponent implements OnInit {
+
+  formatResult(data)
+  {
+      this.athletes = data;
+      this.slides = [];
+      for (let athlete of this.athletes) {
+        this.slides.push(athlete);
+      }
+  }
+
+  constructor(private _tournamentService : TournamentsService) {
+    this._tournamentService.getAthletes()
+      .subscribe(
+        data => this.formatResult(data),
+        error => this.errorMessage = <any>error
+      );
+   }
+
+   athletes: IAthlete[];
+  errorMessage: string;
 
   ngOnInit() {
     this.addNewSlide();

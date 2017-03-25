@@ -277,8 +277,6 @@ public class HelloController {
 					);
 			ps.setDate(1, new java.sql.Date(startDate.getTime()));
 			ps.setDate(2, new java.sql.Date(endDate.getTime()));
-			//ps.setDate(3, new java.sql.Date(startDate.getTime()));
-			//ps.setDate(4, new java.sql.Date(endDate.getTime()));
 			
 			ResultSet rs = ps.executeQuery();
 
@@ -467,35 +465,41 @@ public class HelloController {
 
 	}
 
-    /* @RequestMapping("/")
-    public String index() {
-    	
-    	String dbPassword = System.getenv("DB_PASSWORD");
-    	String findings = "";
-    	
-    	try {
+	@RequestMapping("/getAthletes")
+    public @ResponseBody List<Athlete> getAthletes() {
 
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch (Exception ex) {
-            findings += ex;
-        }
+		List<Athlete> list = new ArrayList<Athlete>();
 		
-		Connection conn = null;
-		
+		// Retrieve the data source from the application context
+		BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+		// Open a database connection using Spring's DataSourceUtils
+		Connection c = DataSourceUtils.getConnection(ds);
 		try {
-		    conn =
-		       DriverManager.getConnection("jdbc:mysql://michaelsinstance.cg5hjai80h9e.us-east-1.rds.amazonaws.com:3306/michaelsdb?" +
-		                                   "user=michael&password=" + dbPassword);
+			// retrieve a list of three random cities
+			PreparedStatement ps = c.prepareStatement(
+				"select * FROM michaelsdb.Athletes");
+			ResultSet rs = ps.executeQuery();
 
-		    
+			while (rs.next()) {
+				String image = rs.getString("picture");
+				String firstName = rs.getString("firstName");
+				String lastName = rs.getString("lastName");
+
+				list.add(new Athlete(image, firstName + " " + lastName));
+			}
+
 		} catch (SQLException ex) {
-		    // handle any errors
-		    findings += ex;
+			// something has failed and we print a stack trace to analyse the error
+			ex.printStackTrace();
+			return list;
+		} finally {
+			// properly release our connection
+			// ignore failure closing connection
+			try { c.close(); } catch (SQLException e) { return list; }
 		}
-		
-		findings += "clean!";
-		
-        return "Greetings 7 from Spring Boot: " + findings;
-    } */
+
+        return list;
+    }
 
 }

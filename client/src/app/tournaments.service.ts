@@ -6,6 +6,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { ITournament } from './tournament';
 import { IStatistic } from './statistic';
+import { IAthlete } from './athlete';
 
 @Injectable()
 export class TournamentsService {
@@ -15,6 +16,7 @@ export class TournamentsService {
   private _createUrl = '/createTournamentService';
   private _deleteUrl = '/deleteTournament';
   private _incrementUrl = '/increaseTeamCountByOne';
+  private _athletesUrl = '/getAthletes';
 
   constructor(private _http: Http) { }
 
@@ -72,6 +74,14 @@ export class TournamentsService {
   {
     console.error('tournament service error:' + error);
     return Observable.throw(error.json().error || 'Server error');
+  }
+
+  getAthletes() : Observable<IAthlete[]>
+  {
+    return this._http.get(this._athletesUrl)
+      .map((response: Response) => <IAthlete[]>response.json())
+      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .catch(this.handleError);
   }
 
 }
