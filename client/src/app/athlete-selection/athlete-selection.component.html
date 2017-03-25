@@ -5,23 +5,23 @@
     
                           <slide *ngFor="let slidez of slides; let index=index"
                                  [active]="slidez.active">
-                                 <table>
-                                   <td>
-                              <img [src]="slidez.image">
+                                 
+                              <img [src]="slidez.image" style="margin:auto;">
                             <div class="carousel-caption">
                               <h3 style="background-color: transparent;color: white;">Slide {{index + 1}}</h3>
                               <p  style="background-color: transparent;color: white;">{{slidez.text}}</p>
                             </div>
-                                   </td>
-                                   <td>
-                                     YYY
-                                     </td>
-                            </table>
+                                   
+                            
                           </slide>
                           
                         </carousel>
-                        
-                                     <app-line-chart-demo-component></app-line-chart-demo-component>
+                        <table>
+   <tr>
+      <td><app-line-chart-demo-component></app-line-chart-demo-component></td>
+   </tr>
+</table>
+                                     
                                     
 
 </p>
