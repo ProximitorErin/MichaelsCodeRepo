@@ -2,11 +2,10 @@
       <ol class="carousel-indicators" [hidden]="slides.length <= 1">
          <li *ngFor="let slidez of slides" [class.active]="slidez.active === true" (click)="select(slidez)"></li>
       </ol>
-      <div class="carousel-inner"><ng-content>ABC</ng-content>RIGHT</div>YYY
+      <div class="carousel-inner"><ng-content></ng-content></div>
                   <a class="left carousel-control" (click)="prev()" [hidden]="!slides.length">
-                      PPP
                   <span class="glyphicon glyphicon-chevron-left"></span>
-                  </a>ZZZ
+                  </a>
                   <a class="right carousel-control" (click)="next()" [hidden]="!slides.length">
                   <span class="glyphicon glyphicon-chevron-right"></span>
                  </a>
