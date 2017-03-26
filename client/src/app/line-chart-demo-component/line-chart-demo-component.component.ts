@@ -34,7 +34,7 @@ export class LineChartDemoComponentComponent implements OnInit {
     {"data":[0,2,0,0,0,2,1,0,1,0,0,0],"label":"strikeouts"}
   ];
 
-  public lineChartLabels:Array<any> = ['Game 1', 'Game 2', 'Game 3'];
+  public lineChartLabels:Array<any> = ['G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10', 'G11', 'G12'];
   public lineChartOptions:any = {
     responsive: true
   };
@@ -71,9 +71,9 @@ export class LineChartDemoComponentComponent implements OnInit {
 
   public trySeparate(): void {
 
-    this._performanceService.getAthleteStatsByDate(15)
+    this._performanceService.getAthleteStatsByDate(14)
                      .subscribe(
-                       heroes => this.holdMyBeer = heroes,
+                       heroes => this.lineChartData = heroes,
                        error =>  this.errorMessage = <any>error);
 
     //this.lineChartData = this._performanceService.getAthleteStatsByDate(15);
