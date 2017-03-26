@@ -21,7 +21,10 @@ export class AthletePerformanceService {
   }
 
   private extractData(res: Response) {
+    console.log("aaa");
     let body = res.json();
+    console.log("bbb" + body);
+    console.log("ccc" + body.data); 
     return body.data || { };
   }
 
