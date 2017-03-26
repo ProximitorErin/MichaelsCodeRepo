@@ -14,10 +14,13 @@ export class AthletePerformanceService {
 
   constructor(private _http: Http) { }
 
-  getAthleteStatsByDate(id:number)
+  getAthleteStatsByDate(id:number) : any
   {
+    // return this._http.get(`/api/races/${id}`)
+                         //.map(response => response.json());
+
     return this._http.get(this._statsUrl + '?id='+id)
-      .map((response: Response) => <IDailyStatForAthlete[]>response.json())
+      .map(response => response.json())
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
   }
