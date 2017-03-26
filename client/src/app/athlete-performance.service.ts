@@ -14,7 +14,18 @@ export class AthletePerformanceService {
 
   constructor(private _http: Http) { }
 
-  getAthleteStatsByDate(id:number) : any
+  getAthleteStatsByDate(id:number): Observable<IDailyStatForAthlete[]> {
+    return this._http.get(this._statsUrl)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    return body.data || { };
+  }
+
+  /* getAthleteStatsByDate(id:number) : any
   {
     // return this._http.get(`/api/races/${id}`)
                          //.map(response => response.json());
@@ -23,7 +34,9 @@ export class AthletePerformanceService {
       .map(response => response.json())
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
-  }
+
+      
+  } */
 
   private handleError(error: Response)
   {

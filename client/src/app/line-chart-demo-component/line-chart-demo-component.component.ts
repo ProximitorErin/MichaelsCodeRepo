@@ -55,9 +55,16 @@ export class LineChartDemoComponentComponent implements OnInit {
   ];
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
+  errorMessage: string;
 
   public trySeparate(): void {
-    this.lineChartData = this._performanceService.getAthleteStatsByDate(15);
+
+    this._performanceService.getAthleteStatsByDate(15)
+                     .subscribe(
+                       heroes => this.lineChartData = heroes,
+                       error =>  this.errorMessage = <any>error);
+
+    //this.lineChartData = this._performanceService.getAthleteStatsByDate(15);
   }
  
   public randomize():void {
