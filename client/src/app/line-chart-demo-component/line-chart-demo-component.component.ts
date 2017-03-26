@@ -17,10 +17,21 @@ export class LineChartDemoComponentComponent implements OnInit {
   }
 
   // lineChart//
-  public lineChartData:Array<any>=[
+  /* public lineChartData:Array<any>=[
     {data: [65, 59, 80], label:'Series A'},
     {data: [28, 48, 40], label: 'Series B'},
     {data: [18, 48, 77], label: 'Series C'}
+  ];*/
+
+  public lineChartData:Array<any>=[
+    {"data":[0,1,0,2,0,0,0,0,0,1,0,2],"label":"assists"},
+    {"data":[4,5,2,6,2,6,8,4,7,7,1,3],"label":"atBats"},
+    {"data":[2,2,1,1,1,3,3,2,2,0,1,1],"label":"hits"},
+    {"data":[0,0,0,0,0,3,2,0,2,2,0,1],"label":"leftonbase"},
+    {"data":[5,3,2,2,3,2,5,5,5,2,2,2],"label":"putouts"},
+    {"data":[1,2,1,1,0,2,3,0,1,0,2,1],"label":"rbis"},
+    {"data":[1,1,0,1,0,1,2,1,1,0,1,0],"label":"runs"},
+    {"data":[0,2,0,0,0,2,1,0,1,0,0,0],"label":"strikeouts"}
   ];
 
   public lineChartLabels:Array<any> = ['Game 1', 'Game 2', 'Game 3'];
@@ -56,12 +67,13 @@ export class LineChartDemoComponentComponent implements OnInit {
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
   errorMessage: string;
+  public holdMyBeer:Array<any>;
 
   public trySeparate(): void {
 
     this._performanceService.getAthleteStatsByDate(15)
                      .subscribe(
-                       heroes => this.lineChartData = heroes,
+                       heroes => this.holdMyBeer = heroes,
                        error =>  this.errorMessage = <any>error);
 
     //this.lineChartData = this._performanceService.getAthleteStatsByDate(15);
