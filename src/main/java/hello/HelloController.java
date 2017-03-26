@@ -502,4 +502,63 @@ public class HelloController {
         return list;
     }
 
+	@RequestMapping("/getDailyStatsByAthlete")
+    public @ResponseBody List<DailyStatForAthlete> getDailyStatsByAthlete(@RequestParam(value="id") int id) {
+
+		List<DailyStatForAthlete> list = new ArrayList<DailyStatForAthlete>();
+
+		// Retrieve the data source from the application context
+		BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+		// Open a database connection using Spring's DataSourceUtils
+		Connection c = DataSourceUtils.getConnection(ds);
+		try {
+			
+			PreparedStatement ps = c.prepareStatement("select sum(scoreMetric) as score, statName "
+			+"FROM michaelsdb.AthletePerformanceInEvent "
+			+"WHERE athleteID = ? "
+			+"group by date, statName "
+			+"order by statName, date");
+					
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			List<Integer> scores = new ArrayList<Integer>();
+			String previousStat = null;
+
+			while (rs.next()) {
+				String statName = rs.getString("statName");
+				int score = rs.getInt("score");
+
+				if (statName.equals(previousStat))
+				{
+					scores.add(score);
+				} 
+				else if (previousStat == null) 
+				{
+					previousStat = statName;
+					scores.add(score);
+				} 
+				else
+				{
+					list.add(new DailyStatForAthlete(scores, previousStat));
+					previousStat = statName;
+					scores = new ArrayList<Integer>();
+					scores.add(score);
+				}
+			}
+
+			return list;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return list;
+		} finally {
+			// properly release our connection
+			// ignore failure closing connection
+			try { c.close(); } catch (SQLException e) { return list; }
+		}
+
+    }
+
 }

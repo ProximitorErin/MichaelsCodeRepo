@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AthletePerformanceService } from '../athlete-performance.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-line-chart-demo-component',
@@ -15,13 +16,14 @@ export class LineChartDemoComponentComponent implements OnInit {
   ngOnInit() {
   }
 
-  // lineChart
-  public lineChartData:Array<any> = [
-    {data: [65, 59, 80], label: 'Series A'},
+  // lineChart//
+  public lineChartData:Observable<any>;
+    /* {data: [65, 59, 80], label: 'Series A'},
     {data: [28, 48, 40], label: 'Series B'},
     {data: [18, 48, 77], label: 'Series C'}
-  ];
-  public lineChartLabels:Array<any> = ['Game 1', 'Game 2', 'Game 3'];
+  ];*/
+
+  public lineChartLabels:Array<any> = []; //['Game 1', 'Game 2', 'Game 3'];
   public lineChartOptions:any = {
     responsive: true
   };
@@ -55,14 +57,15 @@ export class LineChartDemoComponentComponent implements OnInit {
   public lineChartType:string = 'line';
  
   public randomize():void {
-    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
+    this.lineChartData = this._performanceService.getAthleteStatsByDate(15);
+    /* let _lineChartData:Array<any> = new Array(this.lineChartData.length);
     for (let i = 0; i < this.lineChartData.length; i++) {
       _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
       for (let j = 0; j < this.lineChartData[i].data.length; j++) {
         _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
       }
     }
-    this.lineChartData = _lineChartData;
+    this.lineChartData = _lineChartData;*/
   }
  
   // events

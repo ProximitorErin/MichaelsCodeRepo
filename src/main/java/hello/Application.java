@@ -22,7 +22,7 @@ public class Application {
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 
         BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
-        ds.setPassword(System.getenv("DB_PASSWORD"));
+        ds.setPassword("cs411abc");
 
         return args -> {
 
