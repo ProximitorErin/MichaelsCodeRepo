@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TournamentsService } from '../tournaments.service';
-import { IAthlete } from '../Athlete';
+import { IAthlete } from '../athlete';
 
 @Component({
   selector: 'app-athlete-selection',
