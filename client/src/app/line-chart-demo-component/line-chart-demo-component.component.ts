@@ -16,13 +16,6 @@ export class LineChartDemoComponentComponent implements OnInit {
   ngOnInit() {
   }
 
-  // lineChart//
-  /* public lineChartData:Array<any>=[
-    {data: [65, 59, 80], label:'Series A'},
-    {data: [28, 48, 40], label: 'Series B'},
-    {data: [18, 48, 77], label: 'Series C'}
-  ];*/
-
   public lineChartData:Array<any>=[
     {"data":[0,1,0,2,0,0,0,0,0,1,0,2],"label":"assists"},
     {"data":[4,5,2,6,2,6,8,4,7,7,1,3],"label":"atBats"},
@@ -80,6 +73,10 @@ export class LineChartDemoComponentComponent implements OnInit {
   }
  
   public randomize():void {
+    this._performanceService.getAthleteStatsByDate(14)
+                     .subscribe(
+                       heroes => this.lineChartData = heroes,
+                       error =>  this.errorMessage = <any>error);
     /* let _lineChartData:Array<any> = new Array(this.lineChartData.length);
     for (let i = 0; i < this.lineChartData.length; i++) {
       _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};

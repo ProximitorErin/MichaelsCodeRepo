@@ -24,22 +24,8 @@ export class AthletePerformanceService {
     console.log("aaa");
     let body = res.json();
     console.log("bbb" + body);
-    //console.log("ccc" + body.data); 
     return body || { };
   }
-
-  /* getAthleteStatsByDate(id:number) : any
-  {
-    // return this._http.get(`/api/races/${id}`)
-                         //.map(response => response.json());
-
-    return this._http.get(this._statsUrl + '?id='+id)
-      .map(response => response.json())
-      .do(data => console.log('All: ' + JSON.stringify(data)))
-      .catch(this.handleError);
-
-      
-  } */
 
   private handleError(error: Response)
   {
