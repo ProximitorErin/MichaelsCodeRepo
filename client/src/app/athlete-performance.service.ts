@@ -24,8 +24,8 @@ export class AthletePerformanceService {
     console.log("aaa");
     let body = res.json();
     console.log("bbb" + body);
-    console.log("ccc" + body.data); 
-    return body.data || { };
+    //console.log("ccc" + body.data); 
+    return body || { };
   }
 
   /* getAthleteStatsByDate(id:number) : any
