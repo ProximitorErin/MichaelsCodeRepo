@@ -11,13 +11,20 @@ export class AthletePerformanceService {
   private _statsUrl = '/getDailyStatsByAthlete';
 
   charter: LineChartDemoComponentComponent;
+  idx: number;
 
   constructor(private _http: Http) { }
 
   getAthleteStatsByDate(id:number): Observable<IDailyStatForAthlete[]> {
+    console.log("idx: " + this.idx);
     return this._http.get(this._statsUrl + '?id=' + id)
                     .map(this.extractData)
                     .catch(this.handleError);
+  }
+
+  setIndex(index:number)
+  {
+    this.idx = index;
   }
 
   private extractData(res: Response) {

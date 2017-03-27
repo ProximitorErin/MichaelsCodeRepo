@@ -40,6 +40,7 @@ export class Carousel {
   
   public select(nextSlide: Slide, direction: Direction = Direction.UNKNOWN) {
     let nextIndex = nextSlide.index;
+    this._performanceService.setIndex(nextIndex);
     if (direction === Direction.UNKNOWN) {
       direction = nextIndex > this.getCurrentIndex() ? Direction.NEXT : Direction.PREV;
     }

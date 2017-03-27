@@ -68,8 +68,6 @@ export class LineChartDemoComponentComponent implements OnInit {
                      .subscribe(
                        heroes => this.lineChartData = heroes,
                        error =>  this.errorMessage = <any>error);
-
-    //this.lineChartData = this._performanceService.getAthleteStatsByDate(15);
   }
  
   public randomize():void {
@@ -77,14 +75,6 @@ export class LineChartDemoComponentComponent implements OnInit {
                      .subscribe(
                        heroes => this.lineChartData = heroes,
                        error =>  this.errorMessage = <any>error);
-    /* let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-    }
-    this.lineChartData = _lineChartData;*/
   }
  
   // events
