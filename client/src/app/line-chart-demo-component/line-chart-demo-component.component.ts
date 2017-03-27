@@ -64,14 +64,14 @@ export class LineChartDemoComponentComponent implements OnInit {
 
   public trySeparate(): void {
 
-    this._performanceService.getAthleteStatsByDate(14)
+    this._performanceService.getAthleteStatsByDate()
                      .subscribe(
                        heroes => this.lineChartData = heroes,
                        error =>  this.errorMessage = <any>error);
   }
  
   public randomize():void {
-    this._performanceService.getAthleteStatsByDate(14)
+    this._performanceService.getAthleteStatsByDate()
                      .subscribe(
                        heroes => this.lineChartData = heroes,
                        error =>  this.errorMessage = <any>error);

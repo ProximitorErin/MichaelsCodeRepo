@@ -15,9 +15,9 @@ export class AthletePerformanceService {
 
   constructor(private _http: Http) { }
 
-  getAthleteStatsByDate(id:number): Observable<IDailyStatForAthlete[]> {
+  getAthleteStatsByDate(): Observable<IDailyStatForAthlete[]> {
     console.log("idx: " + this.idx);
-    return this._http.get(this._statsUrl + '?id=' + id)
+    return this._http.get(this._statsUrl + '?id=' + this.idx + 1)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
