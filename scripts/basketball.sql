@@ -1,21 +1,21 @@
 use michaelsdb;
 
 INSERT INTO Events (name, date, time, place) VALUES 
-					("Ohio State",2017/1/1,18:00,"State Farm Center"),
-					("Indiana",2017/1/7,16:00,"Bloomington, IN"),
-					("Michigan",2017/1/11,20:00,"State Farm Center"),
-					("Maryland",2017/1/14,17:00,"State Farm Center"),
-					("Purdue",2017/1/17,18:00,"West Lafayette, IN"),
-					("Michigan",2017/1/21,13:15,"Ann Arbor, MI"),
-					("Iowa",2017/1/25,20:00,"State Farm Center"),
-					("Penn State",2017/1/28,15:30,"University Park, PA"),
-					("Wisconsin",2017/1/31,20:00,"State Farm Center"),
-					("Minnesota",2017/2/4,15:00,"State Farm Center"),
-					("Northwestern",2017/2/7,19:00,"Evanston, IL"),
-					("Penn State",2017/2/11,13:00,"State Farm Center"),
-					("Northwestern",2017/2/21,19:00,"State Farm Center"),
-					("Michigan State",2017/3/1,20:00,"State Farm Center"),
-					("Rutgers",2017/3/4,11:00,"Piscataway, NJ");
+					('Ohio State', '2017/1/1', '18:00', 'State Farm Center'),
+					('Indiana', '2017/1/7', '16:00', 'Bloomington, IN'),
+					('Michigan', '2017/1/11', '20:00', 'State Farm Center'),
+					('Maryland', '2017/1/14', '17:00', 'State Farm Center'),
+					('Purdue', '2017/1/17', '18:00', 'West Lafayette, IN'),
+					('Michigan', '2017/1/21', '13:15', 'Ann Arbor, MI'),
+					('Iowa', '2017/1/25', '20:00', 'State Farm Center'),
+					('Penn State', '2017/1/28', '15:30', 'University Park, PA'),
+					('Wisconsin', '2017/1/31', '20:00', 'State Farm Center'),
+					('Minnesota', '2017/2/4', '15:00', 'State Farm Center'),
+					('Northwestern', '2017/2/7', '19:00', 'Evanston, IL'),
+					('Penn State', '2017/2/11', '13:00', 'State Farm Center'),
+					('Northwestern', '2017/2/21', '19:00', 'State Farm Center'),
+					('Michigan State', '2017/3/1', '20:00', 'State Farm Center'),
+					('Rutgers', '2017/3/4', '11:00', 'Piscataway, NJ');
 
 Insert into AthletePerformanceInEvent (athleteID, eventName, date, time, place, scoreMetric, statName, sportName) VALUES
 						(2 , 'Michigan State', '2017/3/01', '20:00', 'State Farm Center', 6 , 'fieldGoals', 'basketball'),               
