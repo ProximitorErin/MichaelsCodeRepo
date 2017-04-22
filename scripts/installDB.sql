@@ -106,9 +106,15 @@ CREATE TABLE TournamentPerformanceScoring(
 
 INSERT INTO Users (name, password, email, isAdmin) VALUES 
                                             ('derekf2', 'derekf2', 'derekf2@illinois.edu', 1), 
-                                            ('gryk2', 'gryk2', 'gryk2@illinois.edu', 0), 
-                                            ('liacopo2', 'liacopo2', 'liacopo2@illinois.edu', 0), 
-                                            ('mwalsh34', 'mwalsh34', 'mwalsh34@illinois.edu', 0);
+                                            ('gryk2', 'gryk2', 'gryk2@illinois.edu', 1), 
+                                            ('liacopo2', 'liacopo2', 'liacopo2@illinois.edu', 1), 
+                                            ('mwalsh34', 'mwalsh34', 'mwalsh34@illinois.edu', 1),
+					    ('atom', 'atoma', 'atomic34@yahoo.com', 1),
+					    ('sparky', 'sparkys', 'd.garpard@comcast.net', 1),
+					    ('darren', 'darrend', 'wieght_dd@gmail.com', 1),
+					    ('yanks', 'yanksy', 'scott06340@yahoo.com', 1),
+					    ('kaisersose', 'kaisersosek', 'flogeje@uconn.edu', 1),
+					    ('sonya', 'sonyas', 's.patters43@gmail.com', 1);
                                  
 INSERT INTO Sports (name, seasonStartDate, seasonEndDate, normalStat) VALUES 
 											('basketball', '16/10/30', '17/3/4','minutes'),
