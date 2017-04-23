@@ -72,6 +72,13 @@ export class TournamentListComponent implements OnInit {
         );
 
    }
+   showAddPlayers(): void
+   {
+     this.showDialog = !this.showDialog;
+   }
+   addPlayers(): void{
+     this.showDialog = !this.showDialog;
+   }
 
   ngOnInit() {
     this._tournamentService.getTournaments()
@@ -84,5 +91,7 @@ export class TournamentListComponent implements OnInit {
   tournaments: ITournament[];
   errorMessage: string;
   answer: string;
+
+  showDialog = false;
 
 }
