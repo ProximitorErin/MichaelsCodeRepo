@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { TournamentsService } from '../tournaments.service';
+import { ITeam } from '../team';
 
 @Component({
   selector: 'app-administrator',

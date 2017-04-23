@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import { ITournament } from './tournament';
 import { IStatistic } from './statistic';
 import { IAthlete } from './athlete';
+import { ITeam } from './team';
 
 @Injectable()
 export class TournamentsService {
@@ -18,6 +19,7 @@ export class TournamentsService {
   private _incrementUrl = '/increaseTeamCountByOne';
   private _athletesUrl = '/getAthletes';
   private _joinUrl = '/joinTournament';
+  private _teamsUrl = '/getTeams';
 
   constructor(private _http: Http) { }
 
@@ -41,7 +43,13 @@ export class TournamentsService {
       .do(data => console.log('All: ' + data))
       .catch(this.handleError);
   }
-
+  getTeamsFor(username: string)
+  {
+    return this._http.get(this._teamsUrl + '&username='+ username)
+    .map((response: Response) => <string>response.text())
+    .do(data => console.log('All: ' + data))
+    .catch(this.handleError);
+  }
 
   deleteTournament(name: string, start: string, end: string)
   {
