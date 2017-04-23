@@ -65,7 +65,7 @@ export class TournamentListComponent implements OnInit {
      console.log(tournament);
 
      this._tournamentService.joinTournament(tournament.name, tournament.startDate, 
-      tournament.endDate, this._auth.getUsername())
+      tournament.endDate, tournament.name)
         .subscribe(
           data => this.formatResult(data),
           error => this.errorMessage = <any>error

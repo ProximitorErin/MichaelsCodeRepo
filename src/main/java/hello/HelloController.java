@@ -131,7 +131,7 @@ public class HelloController {
 		@RequestParam(value="username") String username)
 	{
 
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			/*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 			// Retrieve the data source from the application context
 			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
@@ -166,7 +166,7 @@ public class HelloController {
 				// properly release our connection
 				// ignore failure closing connection
 				try { c.close(); } catch (SQLException e) { return "failure"; }
-			}
+			}*/
 		
     }
 
