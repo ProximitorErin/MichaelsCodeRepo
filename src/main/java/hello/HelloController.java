@@ -149,7 +149,7 @@ public class HelloController {
 				String uname = rs.getString("username");			
 				String tournamentName = rs.getString("tournamentName");
 				java.util.Date tournamentStart = rs.getDate("tournamentStart");
-				java.util.Date tournamentEnd = rs.Date("tournamentEnd");
+				java.util.Date tournamentEnd = rs.getDate("tournamentEnd");
 				list.add(new Team(name, wins, uname, tournamentName, tournamentStart, tournamentEnd));
 				}
 			}
