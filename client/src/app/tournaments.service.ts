@@ -17,7 +17,7 @@ export class TournamentsService {
   private _deleteUrl = '/deleteTournament';
   private _incrementUrl = '/increaseTeamCountByOne';
   private _athletesUrl = '/getAthletes';
-  private _athletesUrl = '/joinTournament';
+  private _joinUrl = '/joinTournament';
 
   constructor(private _http: Http) { }
 
@@ -33,7 +33,7 @@ export class TournamentsService {
 
   joinTournament(name: string, start: string, end: string, username: string)
   {
-    return this._http.get(this._incrementUrl + '?name=' + name +
+    return this._http.get(this._joinUrl + '?name=' + name +
       '&start=' + start +
       '&end=' + end +
       '&username=' + username)
