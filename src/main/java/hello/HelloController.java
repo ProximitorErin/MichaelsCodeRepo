@@ -123,52 +123,6 @@ public class HelloController {
 		
     }
 
-    @RequestMapping("/joinTournament")
-    public @ResponseBody String joinTournament (
-		@RequestParam(value="name") String name,
-		@RequestParam(value="start") String txtStartDate,
-		@RequestParam(value="end") String txtEndDate,
-		@RequestParam(value="username") String username)
-	{
-
-			/*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-			// Retrieve the data source from the application context
-			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
-
-			// Open a database connection using Spring's DataSourceUtils
-			Connection c = DataSourceUtils.getConnection(ds);
-
-			try {
-				
-				java.util.Date startDate = formatter.parse(txtStartDate);
-				java.util.Date endDate = formatter.parse(txtEndDate);
-				
-				PreparedStatement ps = c.prepareStatement("INSERT INTO michaelsdb.Teams "
-						+ "(name, wins, username, tournamentname, startdate, enddate) "
-						+ "VALUES (?, ?, ?, ?, ?, ?)"
-						);
-				ps.setString(1,"UNCREATED");
-				ps.setString(2, 0);
-				ps.setString(3, username);
-				ps.setString(4, name);
-				ps.setDate(5, new java.sql.Date(startDate.getTime()));
-				ps.setDate(6, new java.sql.Date(endDate.getTime()));
-				
-				ps.executeUpdate();
-
-				return "success";
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				return "failure";
-			} finally {
-				// properly release our connection
-				// ignore failure closing connection
-				try { c.close(); } catch (SQLException e) { return "failure"; }
-			}*/
-		
-    }
 
 	@RequestMapping("/deleteTournament")
     public @ResponseBody String deleteTournament (
