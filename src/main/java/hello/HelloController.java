@@ -142,7 +142,7 @@ public class HelloController {
 				ps.setString(1,username);
 
 			
-			ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
 				String name = rs.getString("name");
 				int wins = rs.getInt("wins");
