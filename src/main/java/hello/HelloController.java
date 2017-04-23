@@ -124,7 +124,7 @@ public class HelloController {
     }
 
 	@RequestMapping("/getTeamsFor")
-	public @ReponseBody List<Team> getTeamsFor (
+	public @ResponseBody List<Team> getTeamsFor (
 		@RequestParam(value="username") String username)
 	{
 			List<Team> list = new ArrayList<Team>();
