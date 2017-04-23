@@ -148,7 +148,7 @@ public class HelloController {
 						+ "VALUES (?, ?, ?, ?, ?, ?)"
 						);
 				ps.setString(1,"UNCREATED");
-				ps.setString(2, "0");
+				ps.setInt(2, 0);
 				ps.setString(3, username);
 				ps.setString(4, name);
 				ps.setDate(5, new java.sql.Date(startDate.getTime()));
