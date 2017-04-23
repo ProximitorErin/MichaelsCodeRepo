@@ -19,7 +19,7 @@ export class TournamentsService {
   private _incrementUrl = '/increaseTeamCountByOne';
   private _athletesUrl = '/getAthletes';
   private _joinUrl = '/joinTournament';
-  private _teamsUrl = '/getTeams';
+  private _teamsUrl = '/getTeamsFor';
 
   constructor(private _http: Http) { }
 

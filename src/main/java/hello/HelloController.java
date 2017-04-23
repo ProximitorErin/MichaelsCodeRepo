@@ -123,7 +123,7 @@ public class HelloController {
 		
     }
 
-	@RequestMapping("/getTeams")
+	@RequestMapping("/getTeamsFor")
 	public @ReponseBody List<Team> getTeamsFor (
 		@RequestParam(value="username") String username)
 	{
