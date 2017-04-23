@@ -31,11 +31,12 @@ export class TournamentsService {
       .catch(this.handleError);
   }
 
-  joinTournament(name: string, start: string, end: string)
+  joinTournament(name: string, start: string, end: string, username:string)
   {
     return this._http.get(this._joinUrl + '?name=' + name +
       '&start=' + start +
-      '&end=' + end)
+      '&end=' + end +
+      '&username=' + username)
       .map((response: Response) => <string>response.text())
       .do(data => console.log('All: ' + data))
       .catch(this.handleError);
