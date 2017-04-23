@@ -29,6 +29,7 @@
             <td>{{ tournament.username }}</td>
             <td><a [routerLink]="['/listTournaments']" (click)="delete(tournament);">delete</a></td>
             <td><a [routerLink]="['/listTournaments']" (click)="addOne(tournament);">enlarge</a></td>
+            <td><a [routerLink]="['/listTournaments']" (click)="join(tournament);">join</a></td>
         </tr>
       </tbody>
     </table>
