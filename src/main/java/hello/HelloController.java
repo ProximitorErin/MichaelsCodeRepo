@@ -143,46 +143,12 @@ public class HelloController {
 				java.util.Date startDate = formatter.parse(txtStartDate);
 				java.util.Date endDate = formatter.parse(txtEndDate);
 				
-				PreparedStatement ps = c.prepareStatement("UPDATE michaelsdb.Tournaments SET teamCount = teamCount + 1 "
-						+ "WHERE NAME = ? "
-						+ "AND StartDate = ? "
-						+ "AND EndDate = ?");
-				ps.setString(1, name);
-				ps.setDate(2, new java.sql.Date(startDate.getTime()));
-				ps.setDate(3, new java.sql.Date(endDate.getTime()));
-				
-				ps.executeUpdate();
-
-				return "success";
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				return "failure";
-			} finally {
-				// properly release our connection
-				// ignore failure closing connection
-				try { c.close(); } catch (SQLException e) { return "failure"; }
-			}
-
-			/*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-			// Retrieve the data source from the application context
-			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
-
-			// Open a database connection using Spring's DataSourceUtils
-			Connection c = DataSourceUtils.getConnection(ds);
-
-			try {
-				
-				java.util.Date startDate = formatter.parse(txtStartDate);
-				java.util.Date endDate = formatter.parse(txtEndDate);
-				
 				PreparedStatement ps = c.prepareStatement("INSERT INTO michaelsdb.Teams "
 						+ "(name, wins, username, tournamentname, startdate, enddate) "
 						+ "VALUES (?, ?, ?, ?, ?, ?)"
 						);
 				ps.setString(1,"UNCREATED");
-				ps.setString(2, 0);
+				ps.setString(2, "0");
 				ps.setString(3, username);
 				ps.setString(4, name);
 				ps.setDate(5, new java.sql.Date(startDate.getTime()));
@@ -199,7 +165,7 @@ public class HelloController {
 				// properly release our connection
 				// ignore failure closing connection
 				try { c.close(); } catch (SQLException e) { return "failure"; }
-			}*/
+			}
 		
     }
 
