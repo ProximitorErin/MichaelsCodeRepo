@@ -146,11 +146,11 @@ public class HelloController {
 			while (rs.next()){
 				String name = rs.getString("name");
 				int wins = rs.getInt("wins");
-				String username = rs.getString("username");			
+				String uname = rs.getString("username");			
 				String tournamentName = rs.getString("tournamentName");
-				java.util.Date tournamentStart = rs.getString("tournamentStart");
-				java.util.Date tournamentEnd = rs.getString("tournamentEnd");
-				list.add(new Team(name, wins, username, tournamentName, tournamentStart, tournamentEnd));
+				java.util.Date tournamentStart = rs.getDate("tournamentStart");
+				java.util.Date tournamentEnd = rs.Date("tournamentEnd");
+				list.add(new Team(name, wins, uname, tournamentName, tournamentStart, tournamentEnd));
 				}
 			}
 			catch (SQLException ex){
