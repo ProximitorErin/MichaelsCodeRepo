@@ -144,10 +144,10 @@ public class HelloController {
 				java.util.Date endDate = formatter.parse(txtEndDate);
 				
 				PreparedStatement ps = c.prepareStatement("INSERT INTO michaelsdb.Teams "
-						+ "(name, wins, username, tournamentname, startdate, enddate) "
+						+ "(name, wins, username, tournamentname, tournamentstart, tournamentend) "
 						+ "VALUES (?, ?, ?, ?, ?, ?)"
 						);
-				ps.setString(1,"UNCREATED");
+				ps.setString(1, "UNCREATED_"+username);
 				ps.setInt(2, 0);
 				ps.setString(3, username);
 				ps.setString(4, name);
