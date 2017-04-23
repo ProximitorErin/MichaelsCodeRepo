@@ -123,6 +123,46 @@ public class HelloController {
 		
     }
 
+	@RequestMapping("/getTeams")
+	public @ReponseBody List<Team> getTeamsFor (
+		@RequestParam(value="username") String username)
+	{
+			List<Team> list = new ArrayList<Team>();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			// Retrieve the data source from the application context
+			BasicDataSource ds = (BasicDataSource) ctx.getBean("dataSource");
+
+			// Open a database connection using Spring's DataSourceUtils
+			Connection c = DataSourceUtils.getConnection(ds);
+
+			try {
+				PreparedStatement ps = c.prepareStatement("SELECT (name, wins, username, tournamentName, tournamentStart, tournamentEnd" + 
+				"FROM michaelsdb.Teams" + "WHERE username = ?");
+				ps.setString(1,username);
+
+			
+			ps.executeQuery();
+			while (rs.next()){
+				String name = rs.getString("name");
+				int wins = rs.getInt("wins");
+				String username = rs.getString("username");			
+				String tournamentName = rs.getString("tournamentName");
+				java.util.Date tournamentStart = rs.getString("tournamentStart");
+				java.util.Date tournamentEnd = rs.getString("tournamentEnd");
+				list.add(new Team(name, wins, username, tournamentName, tournamentStart, tournamentEnd));
+				}
+			}
+			catch (SQLException ex){
+				return list;
+			}
+			finally {
+				try { c.close(); } catch (SQLException e ) {return list;}
+			}
+			return list;
+
+	}
+
     @RequestMapping("/joinTournament")
     public @ResponseBody String joinTournament (
 		@RequestParam(value="name") String name,
