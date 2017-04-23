@@ -63,6 +63,7 @@ export class TournamentListComponent implements OnInit {
    {
      console.log("got join!");
      console.log(tournament);
+     this.showDialog = !this.showDialog;
 
      this._tournamentService.joinTournament(tournament.name, tournament.startDate, 
       tournament.endDate, this._auth.getUsername())
@@ -84,6 +85,6 @@ export class TournamentListComponent implements OnInit {
   tournaments: ITournament[];
   errorMessage: string;
   answer: string;
-
+  showDialog = false;
 
 }
