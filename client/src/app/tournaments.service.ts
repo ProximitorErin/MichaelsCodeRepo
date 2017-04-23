@@ -17,6 +17,7 @@ export class TournamentsService {
   private _deleteUrl = '/deleteTournament';
   private _incrementUrl = '/increaseTeamCountByOne';
   private _athletesUrl = '/getAthletes';
+  private _athletesUrl = '/joinTournament';
 
   constructor(private _http: Http) { }
 
@@ -25,6 +26,17 @@ export class TournamentsService {
     return this._http.get(this._incrementUrl + '?name=' + name +
       '&start=' + start +
       '&end=' + end)
+      .map((response: Response) => <string>response.text())
+      .do(data => console.log('All: ' + data))
+      .catch(this.handleError);
+  }
+
+  joinTournament(name: string, start: string, end: string, username: string)
+  {
+    return this._http.get(this._incrementUrl + '?name=' + name +
+      '&start=' + start +
+      '&end=' + end +
+      '&username=' + username)
       .map((response: Response) => <string>response.text())
       .do(data => console.log('All: ' + data))
       .catch(this.handleError);

@@ -59,6 +59,20 @@ export class TournamentListComponent implements OnInit {
 
    }
 
+   join(tournament: ITournament): void
+   {
+     console.log("got join!");
+     console.log(tournament);
+
+     this._tournamentService.joinTournament(tournament.name, tournament.startDate, 
+      tournament.endDate, this._auth.getUsername())
+        .subscribe(
+          data => this.formatResult(data),
+          error => this.errorMessage = <any>error
+        );
+
+   }
+
   ngOnInit() {
     this._tournamentService.getTournaments()
       .subscribe(
