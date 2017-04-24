@@ -31,7 +31,7 @@ export class AdministratorComponent implements OnInit {
     );
   }
 
-  teams: ITeam[] = null;
+  teams: ITeam[];
   errorMessage: string;
   answer: string;
 }
