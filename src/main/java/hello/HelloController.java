@@ -138,7 +138,7 @@ public class HelloController {
 
 			try {
 				PreparedStatement ps = c.prepareStatement("SELECT name, wins, username, tournamentName, tournamentStart, tournamentEnd " + 
-				"FROM michaelsdb.Teams" + "WHERE username = ?");
+				"FROM michaelsdb.Teams " + "WHERE username = ?");
 				ps.setString(1,username);
 
 			
