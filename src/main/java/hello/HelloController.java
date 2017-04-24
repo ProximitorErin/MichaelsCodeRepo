@@ -137,7 +137,7 @@ public class HelloController {
 			Connection c = DataSourceUtils.getConnection(ds);
 
 			try {
-				PreparedStatement ps = c.prepareStatement("SELECT (name, wins, username, tournamentName, tournamentStart, tournamentEnd" + 
+				PreparedStatement ps = c.prepareStatement("SELECT name, wins, username, tournamentName, tournamentStart, tournamentEnd" + 
 				"FROM michaelsdb.Teams" + "WHERE username = ?");
 				ps.setString(1,username);
 
