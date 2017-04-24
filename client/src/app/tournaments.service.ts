@@ -43,7 +43,7 @@ export class TournamentsService {
       .do(data => console.log('All: ' + data))
       .catch(this.handleError);
   }
-  getTeamsFor(username: string)
+  getTeamsFor(username: string) : Observable<ITeam[]>
   {
     return this._http.get(this._teamsUrl + '?username='+ username)
     .map((response: Response) => <ITeam[]>response.json())
