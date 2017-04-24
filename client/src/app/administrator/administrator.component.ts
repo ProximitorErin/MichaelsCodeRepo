@@ -12,6 +12,17 @@ export class AdministratorComponent implements OnInit {
 
   constructor(private _auth: AuthenticationService, private _tournamentService: TournamentsService) { }
 
+  formatResult(result)
+  {
+    this.answer = result;
+
+    this._tournamentService.getTeamsFor(this._auth.getUsername())
+      .subscribe(
+        tournaments => this.teams = teams,
+        error => this.errorMessage = <any>error
+      );
+  }
+
   ngOnInit() {
     this._tournamentService.getTeamsFor(this._auth.getUsername())
     .subscribe(
@@ -22,5 +33,5 @@ export class AdministratorComponent implements OnInit {
 
   teams: ITeam[] = null;
   errorMessage: string;
-
+  answer: string;
 }
