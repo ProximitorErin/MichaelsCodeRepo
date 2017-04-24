@@ -46,8 +46,8 @@ export class TournamentsService {
   getTeamsFor(username: string)
   {
     return this._http.get(this._teamsUrl + '?username='+ username)
-    .map((response: Response) => <ITeam[]>response.text())
-    .do(data => console.log('All: ' + data))
+    .map((response: Response) => <ITeam[]>response.json())
+    .do(data => console.log('All: ' + JSON.stringify(data)))
     .catch(this.handleError);
   }
 
