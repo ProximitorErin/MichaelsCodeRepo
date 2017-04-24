@@ -18,7 +18,7 @@ export class AdministratorComponent implements OnInit {
 
     this._tournamentService.getTeamsFor(this._auth.getUsername())
       .subscribe(
-        tournaments => this.teams = teams,
+        teams => this.teams = teams,
         error => this.errorMessage = <any>error
       );
   }
